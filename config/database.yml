@@ -6,6 +6,9 @@ default: &default
 development:
   <<: *default
   database: cam_sizes_development
+  host: localhost
+  username: postgres
+  password:
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
