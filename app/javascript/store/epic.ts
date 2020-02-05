@@ -3,7 +3,7 @@ import { ajax } from 'rxjs/ajax';
 import { filter, exhaustMap, map, tap } from 'rxjs/operators';
 import { isActionOf } from 'typesafe-actions';
 
-import { RootEpic, RootState } from './types';
+import { RootEpic, EntitiesState } from './types';
 import actions from './actions';
 
 const fetchCamsEpic: RootEpic = (action$) => 
@@ -17,7 +17,7 @@ const fetchCamsEpic: RootEpic = (action$) =>
                     'Content-Type': 'application/json'
                 }
             }).pipe(
-                map(({ response }) => actions.fetchCamsAsync.success(response as RootState, { camelize: true }))
+                map(({ response }) => actions.fetchCamsAsync.success(response as EntitiesState, { camelize: true }))
             )
         )
     );

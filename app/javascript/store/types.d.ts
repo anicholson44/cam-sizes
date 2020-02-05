@@ -36,10 +36,15 @@ export interface Cam extends Entity {
     strength: number;
 }
 
-export type RootState = {
+export interface EntitiesState {
     manufacturers: EntityMap<Manufacturer>;
     camStyles: EntityMap<CamStyle>;
     cams: EntityMap<Cam>;
+}
+
+export interface RootState {
+    entities: EntitiesState;
+    loading?: boolean;
 }
 
 export type RootEpic = Epic<RootAction, RootAction, RootState | void, { api: string }>;
