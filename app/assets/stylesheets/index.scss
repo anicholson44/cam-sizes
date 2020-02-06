@@ -3,3 +3,14 @@
     height: 100%;
     width: 100%;
 }
+
+#center-column {
+    margin: 0 10% 0 10%;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 20px 0;
+}

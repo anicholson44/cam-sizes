@@ -42,9 +42,16 @@ export interface EntitiesState {
     cams: EntityMap<Cam>;
 }
 
+// efficient data structure for storing a set of ids, because object are easier to work with
+// than sets in JavaScript
+export interface IdStore {
+    [id: number]: true;
+}
+
 export interface RootState {
     entities: EntitiesState;
-    loading?: boolean;
+    loading: boolean;
+    selectedCamStyles: IdStore;
 }
 
 export type RootEpic = Epic<RootAction, RootAction, RootState | void, { api: string }>;

@@ -1,4 +1,4 @@
-import { createAsyncAction } from 'typesafe-actions';
+import { createAsyncAction, createAction } from 'typesafe-actions';
 
 import { EntitiesState } from './types';
 
@@ -8,6 +8,9 @@ const fetchCamsAsync = createAsyncAction(
     'FETCH_CAMS_FAILURE'
 )<void, [EntitiesState, { camelize: true }], Error>();
 
+const selectCamStyle = createAction('SELECT_CAM_STYLE')<number>();
+
 export default {
-    fetchCamsAsync
+    fetchCamsAsync,
+    selectCamStyle
 };
