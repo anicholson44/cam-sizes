@@ -12,6 +12,7 @@ black_diamond = Manufacturer.find_or_create_by!(name: 'Black Diamond')
 
 c4 = CamStyle.find_or_create_by!(name: 'Camalot C4 2019') do |c|
   c.manufacturer_id = black_diamond.id
+  c.color_label = 'black'
 end
 
 c4s = [
@@ -107,6 +108,7 @@ totem = Manufacturer.find_or_create_by!(name: 'Totem')
 
 totem_cam = CamStyle.find_or_create_by!(name: 'Totem Cam') do |c|
   c.manufacturer_id = totem.id
+  c.color_label = 'yellow'
 end
 
 totems = [

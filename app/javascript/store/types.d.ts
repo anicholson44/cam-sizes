@@ -25,6 +25,7 @@ export interface Manufacturer extends Entity {
 export interface CamStyle extends Entity {
     name: string;
     cams: number[];
+    colorLabel: string;
 }
 
 export interface Cam extends Entity {
@@ -34,6 +35,7 @@ export interface Cam extends Entity {
     rangeMax: number;
     weight: number;
     strength: number;
+    camStyleId: number;
 }
 
 export interface EntitiesState {
