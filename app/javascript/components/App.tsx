@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { Provider, useSelector } from 'react-redux';
 import { Loader, Header } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 import store, { actions } from '../store';
 import { RootState } from '../store/types';
 import CamMenu from './CamMenu';
-
-import 'semantic-ui-css/semantic.min.css';
+import CamChart from './CamChart';
 
 const AppContainer = () => {
     const loading = useSelector<RootState>(({ loading }) => loading);
@@ -19,6 +19,7 @@ const AppContainer = () => {
                     <Header as='h1'>Cam Size Comparison</Header>
                 </div>
                 <CamMenu />
+                <CamChart />
             </div>
         </div>
     );
