@@ -329,3 +329,64 @@ mastercams.each do |attrs|
     c.cam_style_id = mastercam.id
   end
 end
+
+tcu = CamStyle.find_or_create_by!(name: 'TCU') do |c|
+  c.manufacturer_id = metolius.id
+end
+
+tcus = [
+  {
+    name: '00',
+    color: 'grey',
+    range_min: 8.5,
+    range_max: 12,
+    strength: 5,
+    weight: 41
+  },
+  {
+    name: '0',
+    color: 'purple',
+    range_min: 10,
+    range_max: 15,
+    strength: 5,
+    weight: 43
+  },
+  {
+    name: '#1',
+    color: 'blue',
+    range_min: 12.5,
+    range_max: 18,
+    strength: 8,
+    weight: 50
+  },
+  {
+    name: '#2',
+    color: 'yellow',
+    range_min: 15.5,
+    range_max: 22.5,
+    strength: 10,
+    weight: 57
+  },
+  {
+    name: '#3',
+    color: 'orange',
+    range_min: 18.5,
+    range_max: 26.5,
+    strength: 10,
+    weight: 59
+  },
+  {
+    name: '#4',
+    color: 'red',
+    range_min: 23.5,
+    range_max: 33.5,
+    strength: 10,
+    weight: 68
+  },
+]
+
+tcus.each do |attrs|
+  Cam.find_or_create_by!(attrs) do |c|
+    c.cam_style_id = tcu.id
+  end
+end
