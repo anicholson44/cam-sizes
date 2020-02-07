@@ -34,6 +34,7 @@ export interface Cam extends Entity {
     rangeMax: number;
     weight: number;
     strength: number;
+    camStyleId: number;
 }
 
 export interface EntitiesState {

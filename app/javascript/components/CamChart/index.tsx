@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState, Cam } from "../../store";
+import { RootState, Cam, EntityMap, CamStyle } from "../../store";
 import XAxisTick from "./XAxisTick";
 import CamRect from "./CamRect";
 
@@ -41,7 +41,8 @@ const CamChart = () => {
       (first.rangeMax - first.rangeMin) / 2 -
       (second.rangeMax - second.rangeMin) / 2
   );
-  const camRects = selectedCams.map(({ color, rangeMin, rangeMax }, i) => (
+  const camStyles = useSelector<RootState, EntityMap<CamStyle>>(({ entities }) => entities.camStyles);
+  const camRects = selectedCams.map(({ color, rangeMin, rangeMax, name, camStyleId }, i) => (
     <CamRect
       key={i}
       color={color}
@@ -49,6 +50,7 @@ const CamChart = () => {
       x={millimetersToPixels * rangeMin}
       width={millimetersToPixels * (rangeMax - rangeMin)}
       index={i}
+      label={`${camStyles[camStyleId].name} ${name}`}
     />
   ));
 
@@ -57,7 +59,9 @@ const CamChart = () => {
       <line x1={0} y1={0} x2={0} y2="100%" stroke="black" />
       <line x1={0} y1={0} y2={0} x2="100%" stroke="black" />
       {xTicks}
-      {camRects}
+      <g transform="translate(0 20)">
+        {camRects}
+      </g>
     </svg>
   );
 };
