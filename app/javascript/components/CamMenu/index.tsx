@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Accordion } from "semantic-ui-react";
+import { Segment, List, Header } from "semantic-ui-react";
 import { useSelector } from "react-redux";
 import { RootState, EntitiesState } from "../../store";
 import ManufacturerMenuItem from "./ManufacturerMenuItem";
@@ -9,17 +9,16 @@ const CamMenu = () => {
     ({ entities }) => entities
   );
 
-  const panels = Object.values(entities.manufacturers).map(({ name, id }) => ({
-    key: `manufacturer-${id}`,
-    title: name,
-    content: {
-      content: <ManufacturerMenuItem id={id} />
-    }
-  }));
-
   return (
     <Segment>
-      <Accordion panels={panels} exclusive={false} />
+      <List>
+        {Object.values(entities.manufacturers).map(({ name, id }) => (
+          <List.Item key={id}>
+            <Header as='h3'>{name}</Header>
+            <ManufacturerMenuItem id={id} />
+          </List.Item>
+        ))}
+      </List>
     </Segment>
   );
 };
