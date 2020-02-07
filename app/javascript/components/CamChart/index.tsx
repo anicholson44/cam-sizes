@@ -38,8 +38,8 @@ const CamChart = () => {
   );
   selectedCams.sort(
     (first, second) =>
-      (first.rangeMax - first.rangeMin) / 2 -
-      (second.rangeMax - second.rangeMin) / 2
+      (first.rangeMax + first.rangeMin) / 2 -
+      (second.rangeMax + second.rangeMin) / 2
   );
   const camStyles = useSelector<RootState, EntityMap<CamStyle>>(({ entities }) => entities.camStyles);
   const camRects = selectedCams.map(({ color, rangeMin, rangeMax, name, camStyleId }, i) => (

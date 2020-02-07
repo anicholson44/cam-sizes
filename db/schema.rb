@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 2020_02_05_133047) do
   create_table "cams", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "cam_style_id", null: false
-    t.decimal "range_min", null: false
-    t.decimal "range_max", null: false
-    t.decimal "weight", null: false
-    t.decimal "strength", null: false
+    t.float "range_min", null: false
+    t.float "range_max", null: false
+    t.float "weight", null: false
+    t.float "strength", null: false
     t.string "color", null: false
     t.index ["cam_style_id"], name: "index_cams_on_cam_style_id"
   end
