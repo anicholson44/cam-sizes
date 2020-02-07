@@ -103,6 +103,67 @@ c4s.each do |attrs|
   end
 end
 
+x4 = CamStyle.find_or_create_by!(name: 'Camalot X4') do |c|
+  c.manufacturer_id = black_diamond.id
+end
+
+x4s = [
+  {
+    name: '.1',
+    weight: 51,
+    strength: 5,
+    range_min: 8.4,
+    range_max: 13.8,
+    color: 'red'
+  },
+  {
+    name: '.2',
+    weight: 54,
+    strength: 6,
+    range_min: 9.9,
+    range_max: 16.5,
+    color: 'yellow'
+  },
+  {
+    name: '.3',
+    range_min: 12.4,
+    range_max: 21.2,
+    weight: 75,
+    strength: 8,
+    color: 'blue'
+  },
+  {
+    name: '.4',
+    range_min: 15.5,
+    range_max: 26.6,
+    weight: 82,
+    strength: 9,
+    color: 'grey'
+  },
+  {
+    name: '.5',
+    range_min: 19.8,
+    range_max: 33.7,
+    weight: 91,
+    strength: 9,
+    color: 'purple'
+  },
+  {
+    name: '.75',
+    range_min: 24,
+    range_max: 41.2,
+    weight: 112,
+    strength: 9,
+    color: 'green'
+  }
+]
+
+x4s.each do |attrs|
+  Cam.find_or_create_by!(attrs) do |c|
+    c.cam_style_id = x4.id
+  end
+end
+
 totem = Manufacturer.find_or_create_by!(name: 'Totem')
 
 totem_cam = CamStyle.find_or_create_by!(name: 'Totem Cam') do |c|
