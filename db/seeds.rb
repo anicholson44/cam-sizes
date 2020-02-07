@@ -234,3 +234,98 @@ totems.each do |attrs|
     c.cam_style_id = totem_cam.id
   end
 end
+
+metolius = Manufacturer.find_or_create_by!(name: 'Metolius')
+
+mastercam = CamStyle.find_or_create_by!(name: 'Master Cam') do |c|
+  c.manufacturer_id = metolius.id
+end
+
+mastercams = [
+  {
+    name: '00',
+    color: 'grey',
+    range_min: 8.5,
+    range_max: 12,
+    strength: 5,
+    weight: 45
+  },
+  {
+    name: '0',
+    color: 'purple',
+    range_min: 10,
+    range_max: 15,
+    strength: 5,
+    weight: 45
+  },
+  {
+    name: '#1',
+    color: 'blue',
+    range_min: 12.5,
+    range_max: 18,
+    strength: 8,
+    weight: 52
+  },
+  {
+    name: '#2',
+    color: 'yellow',
+    range_min: 15.5,
+    range_max: 22.5,
+    strength: 10,
+    weight: 55
+  },
+  {
+    name: '#3',
+    color: 'orange',
+    range_min: 18.5,
+    range_max: 26.5,
+    strength: 10,
+    weight: 65
+  },
+  {
+    name: '#4',
+    color: 'red',
+    range_min: 23.5,
+    range_max: 33.5,
+    strength: 10,
+    weight: 75
+  },
+  {
+    name: '#5',
+    color: 'black',
+    range_min: 28,
+    range_max: 39.5,
+    strength: 10,
+    weight: 85
+  },
+  {
+    name: '#6',
+    color: 'green',
+    range_min: 32.5,
+    range_max: 48,
+    strength: 10,
+    weight: 96
+  },
+  {
+    name: '#7',
+    color: 'blue',
+    range_min: 40,
+    range_max: 57.5,
+    strength: 10,
+    weight: 112
+  },
+  {
+    name: '#8',
+    color: 'purple',
+    range_min: 48.5,
+    range_max: 71.5,
+    strength: 10,
+    weight: 129
+  }
+]
+
+mastercams.each do |attrs|
+  Cam.find_or_create_by!(attrs) do |c|
+    c.cam_style_id = mastercam.id
+  end
+end
