@@ -10,16 +10,14 @@ const CamMenu = () => {
   );
 
   return (
-    <Segment>
-      <List>
-        {Object.values(entities.manufacturers).map(({ name, id }) => (
-          <List.Item key={id}>
-            <Header as='h3'>{name}</Header>
-            <ManufacturerMenuItem id={id} />
-          </List.Item>
-        ))}
-      </List>
-    </Segment>
+    <List>
+      {Object.values(entities.manufacturers).map(({ name, id }) => (
+        <List.Item key={id}>
+          <Header as="h3">{name}</Header>
+          <ManufacturerMenuItem id={id} />
+        </List.Item>
+      ))}
+    </List>
   );
 };
 

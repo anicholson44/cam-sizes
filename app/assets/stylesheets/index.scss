@@ -2,15 +2,19 @@
     position: fixed;
     height: 100%;
     width: 100%;
+    display: flex;
 }
 
-#center-column {
-    margin: 0 10% 0 10%;
+#menu-container {
+    margin: 0px 20px;
+}
+
+#chart-container {
+    width: 100%;
 }
 
 #header {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 20px 0 20px 0;
+    margin: 20px 0 20px 0px;
 }
