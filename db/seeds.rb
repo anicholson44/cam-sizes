@@ -10,7 +10,7 @@
 
 black_diamond = Manufacturer.find_or_create_by!(name: 'Black Diamond')
 
-c4 = CamStyle.find_or_create_by!(name: 'Camalot C4 2019') do |c|
+c4 = CamStyle.find_or_create_by!(name: 'Camalot C4') do |c|
   c.manufacturer_id = black_diamond.id
 end
 
