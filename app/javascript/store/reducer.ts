@@ -9,7 +9,8 @@ const initialState: RootState = {
     camStyles: {},
     cams: {}
   },
-  selectedCamStyles: {}
+  selectedCamStyles: {},
+  selectedCams: {}
 };
 
 const reducer = (state: RootState = initialState, action: RootAction) => {

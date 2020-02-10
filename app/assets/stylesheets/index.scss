@@ -1,20 +1,51 @@
 #container {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    display: flex;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
 
 #menu-container {
-    margin: 0px 20px;
+  margin: 0px 20px;
 }
 
 #chart-container {
-    width: 100%;
+  width: 100%;
 }
 
 #header {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 20px 0px;
+}
+
+.cam-list {
+  padding-top: 4px;
+
+  > * {
+    margin-bottom: 4px;
+  }
+
+  .cam-menu-item {
     display: flex;
-    justify-content: center;
-    margin: 20px 0 20px 0px;
+    align-items: center;
+    justify-content: space-between;
+
+    > i.icon.plus,
+    i.icon.minus {
+      margin-bottom: 1px;
+      cursor: pointer;
+    }
+    .cam-name-and-color {
+      display: flex;
+      align-items: center;
+      > * {
+        margin: 3px;
+      }
+      .cam-color-preview {
+        width: 1em;
+        height: 1em;
+      }
+    }
+  }
 }

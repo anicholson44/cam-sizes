@@ -52,6 +52,7 @@ export interface IdStore {
 export interface RootState {
   readonly entities: EntitiesState;
   readonly selectedCamStyles: IdStore;
+  readonly selectedCams: IdStore;
 }
 
 export type RootEpic = Epic<

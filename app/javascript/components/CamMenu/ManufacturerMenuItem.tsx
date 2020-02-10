@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Accordion, Menu, List } from "semantic-ui-react";
 import { RootState, CamStyle, EntityMap, Cam, IdStore } from "../../store";
 import CamStyleCheckbox from "./CamStyleCheckbox";
+import CamMenuItem from "./CamMenuItem";
 
 const ManufacturerMenuItem = ({ id }: { id: number }) => {
   const camStyles = useSelector<RootState, CamStyle[]>(({ entities }) =>
@@ -35,11 +36,11 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
             <Accordion.Content
               active={active}
               content={
-                <List>
+                <div className="cam-list">
                   {camStyle.cams.map(id => (
-                    <List.Item key={id}>{cams[id].name} {cams[id].color}</List.Item>
+                    <CamMenuItem key={id} {...cams[id]}/>
                   ))}
-                </List>
+                </div>
               }
             />
           </Menu.Item>
