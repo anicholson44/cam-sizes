@@ -29,39 +29,42 @@ const xTicks = Array.from({ length: numXTicks }, (_, i) => (
 const CamChart = () => {
   const selectedCams = useSelector<RootState, Cam[]>(
     ({ selectedCamStyles, entities }) =>
-      Object.keys(selectedCamStyles).reduce((a, id) => {
-        entities.camStyles[id].cams.forEach(camId =>
-          a.push(entities.cams[camId])
-        );
-        return a;
+      Object.values(selectedCamStyles).reduce((a, camIds) => {
+        return [
+          ...a,
+          ...Object.keys(camIds).map(camId => entities.cams[Number(camId)])
+        ];
       }, [])
   );
-  selectedCams.sort(
-    (first, second) =>
+  selectedCams.sort((first, second) => {
+    return (
       (first.rangeMax + first.rangeMin) / 2 -
       (second.rangeMax + second.rangeMin) / 2
+    );
+  });
+  const camStyles = useSelector<RootState, EntityMap<CamStyle>>(
+    ({ entities }) => entities.camStyles
   );
-  const camStyles = useSelector<RootState, EntityMap<CamStyle>>(({ entities }) => entities.camStyles);
-  const camRects = selectedCams.map(({ color, rangeMin, rangeMax, name, camStyleId }, i) => (
-    <CamRect
-      key={i}
-      color={color}
-      stroke="black"
-      x={millimetersToPixels * rangeMin}
-      width={millimetersToPixels * (rangeMax - rangeMin)}
-      index={i}
-      label={`${camStyles[camStyleId].name} ${name}`}
-    />
-  ));
+  const camRects = selectedCams.map(
+    ({ color, rangeMin, rangeMax, name, camStyleId }, i) => (
+      <CamRect
+        key={i}
+        color={color}
+        stroke="black"
+        x={millimetersToPixels * rangeMin}
+        width={millimetersToPixels * (rangeMax - rangeMin)}
+        index={i}
+        label={`${camStyles[camStyleId].name} ${name}`}
+      />
+    )
+  );
 
   return (
     <svg viewBox={`-${paddingX} -${paddingY} ${width} ${height}`}>
       <line x1={0} y1={0} x2={0} y2="100%" stroke="black" />
       <line x1={0} y1={0} y2={0} x2="100%" stroke="black" />
       {xTicks}
-      <g transform="translate(0 20)">
-        {camRects}
-      </g>
+      <g transform="translate(0 20)">{camRects}</g>
     </svg>
   );
 };
