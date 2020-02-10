@@ -19,7 +19,8 @@ const CamStyleCheckbox = ({ id }: CamStyle) => {
       name={checked ? "minus" : "plus"}
       style={{
         float: "left",
-        margin: "0 1em 0 0"
+        margin: "0 1em 0 0",
+        cursor: "pointer"
       }}
     />
   );
