@@ -9,8 +9,10 @@ const fetchCamsAsync = createAsyncAction(
 )<void, [EntitiesState, { camelize: true }], Error>();
 
 const selectCamStyle = createAction('SELECT_CAM_STYLE')<number>();
+const deselectCamStyle = createAction('DESELECT_CAM_STYLE')<number>();
 
 export default {
     fetchCamsAsync,
-    selectCamStyle
+    selectCamStyle,
+    deselectCamStyle
 };

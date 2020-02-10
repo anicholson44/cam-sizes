@@ -1,7 +1,6 @@
-import { createReducer, getType } from "typesafe-actions";
-import produce from "immer";
+import { getType } from "typesafe-actions";
 
-import { RootState } from "./types";
+import { RootState, RootAction } from "./types";
 import actions from "./actions";
 
 const initialState: RootState = {
@@ -13,20 +12,33 @@ const initialState: RootState = {
   selectedCamStyles: {}
 };
 
-const reducer = createReducer(initialState, {
-  [getType(actions.fetchCamsAsync.success)]: produce(
-    (draftState, { payload }) => {
-      draftState.entities = payload;
-      draftState.selectedCamStyles[Object.keys(payload.camStyles)[0]] = true;
+const reducer = (state: RootState = initialState, action: RootAction) => {
+  switch (action.type) {
+    case getType(actions.fetchCamsAsync.success): {
+      const { payload: entities } = action;
+      return { ...state, entities };
     }
-  ),
-  [getType(actions.selectCamStyle)]: produce((draftState, { payload: id }) => {
-    if (draftState.selectedCamStyles[id]) {
-      delete draftState.selectedCamStyles[id];
-    } else {
-      draftState.selectedCamStyles[id] = true;
+    case getType(actions.selectCamStyle): {
+      return {
+        ...state,
+        selectedCamStyles: {
+          ...state.selectedCamStyles,
+          [action.payload]: true
+        }
+      };
     }
-  })
-});
+    case getType(actions.deselectCamStyle): {
+      const selectedCamStyles = { ...state.selectedCamStyles };
+      delete selectedCamStyles[action.payload];
+      return {
+        ...state,
+        selectedCamStyles
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+};
 
 export default reducer;
