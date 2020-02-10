@@ -51,7 +51,6 @@ export interface IdStore {
 
 export interface RootState {
     entities: EntitiesState;
-    loading: boolean;
     selectedCamStyles: IdStore;
 }
 
