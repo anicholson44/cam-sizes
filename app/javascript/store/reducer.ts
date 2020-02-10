@@ -3,7 +3,7 @@ import { getType } from "typesafe-actions";
 import { RootState, RootAction } from "./types";
 import actions from "./actions";
 
-const initialState: RootState = {
+const defaultState: RootState = {
   entities: {
     manufacturers: {},
     camStyles: {},
@@ -13,7 +13,7 @@ const initialState: RootState = {
 };
 
 const reducer = (
-  state: RootState = initialState,
+  state: RootState = defaultState,
   action: RootAction
 ): RootState => {
   switch (action.type) {
@@ -84,4 +84,5 @@ const reducer = (
   }
 };
 
-export default reducer;
+export default initialState => (state = initialState, action) =>
+  reducer(state, action);

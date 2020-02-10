@@ -5,6 +5,7 @@ import camelize from "redux-camelize";
 
 import reducer from "./reducer";
 import epic from "./epic";
+import localStorageMiddleware, { rootStateStorage } from "./middleware/local-storage";
 
 export { default as actions } from "./actions";
 export * from "./types";
@@ -12,8 +13,10 @@ export * from "./types";
 const epicMiddleware = createEpicMiddleware();
 
 const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(camelize(), epicMiddleware))
+  reducer(rootStateStorage.get()),
+  composeWithDevTools(
+    applyMiddleware(camelize(), epicMiddleware, localStorageMiddleware)
+  )
 );
 
 epicMiddleware.run(epic);
