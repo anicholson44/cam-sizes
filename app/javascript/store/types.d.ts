@@ -1,57 +1,62 @@
-import { StateType, ActionType } from 'typesafe-actions';
-import { Epic } from 'redux-observable';
+import { StateType, ActionType } from "typesafe-actions";
+import { Epic } from "redux-observable";
 
-export type RootAction = ActionType<typeof import('./actions').default>;
+export type RootAction = ActionType<typeof import("./actions").default>;
 
-declare module 'typesafe-actions' {
+declare module "typesafe-actions" {
   interface Types {
     RootAction: RootAction;
   }
 }
 
 export interface Entity {
-    id: number;
+  readonly id: number;
 }
 
 export interface EntityMap<E extends Entity> {
-    [id: number]: E;
+  readonly [id: number]: E;
 }
 
 export interface Manufacturer extends Entity {
-    name: string;
-    camStyles: number[];
+  readonly name: string;
+  readonly camStyles: ReadonlyArray<number>;
 }
 
 export interface CamStyle extends Entity {
-    name: string;
-    cams: number[];
+  readonly name: string;
+  readonly cams: ReadonlyArray<number>;
 }
 
 export interface Cam extends Entity {
-    name: string;
-    color: string;
-    rangeMin: number;
-    rangeMax: number;
-    weight: number;
-    strength: number;
-    camStyleId: number;
+  readonly name: string;
+  readonly color: string;
+  readonly rangeMin: number;
+  readonly rangeMax: number;
+  readonly weight: number;
+  readonly strength: number;
+  readonly camStyleId: number;
 }
 
 export interface EntitiesState {
-    manufacturers: EntityMap<Manufacturer>;
-    camStyles: EntityMap<CamStyle>;
-    cams: EntityMap<Cam>;
+  readonly manufacturers: EntityMap<Manufacturer>;
+  readonly camStyles: EntityMap<CamStyle>;
+  readonly cams: EntityMap<Cam>;
 }
 
-// efficient data structure for storing a set of ids, because object are easier to work with
+// efficient data structure for storing a set of ids, because objects are easier to work with
 // than sets in JavaScript
 export interface IdStore {
-    [id: number]: true;
+  readonly [id: number]: true;
 }
 
 export interface RootState {
-    entities: EntitiesState;
-    selectedCamStyles: IdStore;
+  readonly entities: EntitiesState;
+  readonly selectedCamStyles: IdStore;
 }
 
-export type RootEpic = Epic<RootAction, RootAction, RootState | void, { api: string }>;
+export type RootEpic = Epic<
+  RootAction,
+  RootAction,
+  RootState | void,
+  { api: string }
+>;
