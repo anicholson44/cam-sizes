@@ -1,7 +1,7 @@
 import { createReducer, getType } from "typesafe-actions";
 import produce from "immer";
 
-import { RootState, RootAction } from "./types";
+import { RootState } from "./types";
 import actions from "./actions";
 
 const initialState: RootState = {
@@ -10,7 +10,7 @@ const initialState: RootState = {
     camStyles: {},
     cams: {}
   },
-  selectedCamStyles: { }
+  selectedCamStyles: {}
 };
 
 const reducer = createReducer(initialState, {
