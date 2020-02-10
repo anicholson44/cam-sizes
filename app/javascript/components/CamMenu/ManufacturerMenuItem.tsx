@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Accordion, Menu, List } from "semantic-ui-react";
-import { RootState, CamStyle, EntityMap, Cam, IdStore } from "../../store";
+import { Accordion, Menu } from "semantic-ui-react";
+import {
+  RootState,
+  CamStyle,
+  EntityMap,
+  Cam,
+  IdStore,
+  SelectedCamStyles
+} from "../../store";
 import CamStyleCheckbox from "./CamStyleCheckbox";
 import CamMenuItem from "./CamMenuItem";
 
@@ -12,7 +19,10 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
   const cams = useSelector<RootState, EntityMap<Cam>>(
     ({ entities }) => entities.cams
   );
-  const [activeAccordions, setActiveAccordions] = useState<IdStore>({});
+  const selectedCamStyles = useSelector<RootState, SelectedCamStyles>(
+    ({ selectedCamStyles }) => selectedCamStyles
+  );
+  const [activeAccordions, setActiveAccordions] = useState<IdStore<true>>({});
 
   return (
     <Accordion as={Menu} vertical>
@@ -38,7 +48,14 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
               content={
                 <div className="cam-list">
                   {camStyle.cams.map(id => (
-                    <CamMenuItem key={id} {...cams[id]}/>
+                    <CamMenuItem
+                      key={id}
+                      {...cams[id]}
+                      selected={
+                        selectedCamStyles[camStyle.id] &&
+                        selectedCamStyles[camStyle.id][id]
+                      }
+                    />
                   ))}
                 </div>
               }

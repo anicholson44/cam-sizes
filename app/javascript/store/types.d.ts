@@ -45,14 +45,18 @@ export interface EntitiesState {
 
 // efficient data structure for storing a set of ids, because objects are easier to work with
 // than sets in JavaScript
-export interface IdStore {
-  readonly [id: number]: true;
+export interface IdStore<V> {
+  readonly [id: number]: V;
 }
+
+// Store selected cam styles and selected cams in a nested data structure. The top-level keys
+// are cam style ids. The top-level values are id stores of selected cam ids for those cam style
+// ids. This support the select all, deselect all, select, and deselect actions for cams.
+export type SelectedCamStyles = IdStore<IdStore<boolean>>;
 
 export interface RootState {
   readonly entities: EntitiesState;
-  readonly selectedCamStyles: IdStore;
-  readonly selectedCams: IdStore;
+  readonly selectedCamStyles: SelectedCamStyles;
 }
 
 export type RootEpic = Epic<

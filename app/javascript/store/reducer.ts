@@ -9,11 +9,13 @@ const initialState: RootState = {
     camStyles: {},
     cams: {}
   },
-  selectedCamStyles: {},
-  selectedCams: {}
+  selectedCamStyles: {}
 };
 
-const reducer = (state: RootState = initialState, action: RootAction) => {
+const reducer = (
+  state: RootState = initialState,
+  action: RootAction
+): RootState => {
   switch (action.type) {
     case getType(actions.fetchCamsAsync.success): {
       const { payload: entities } = action;
@@ -24,13 +26,53 @@ const reducer = (state: RootState = initialState, action: RootAction) => {
         ...state,
         selectedCamStyles: {
           ...state.selectedCamStyles,
-          [action.payload]: true
+          [action.payload]: state.entities.camStyles[
+            action.payload
+          ].cams.reduce((o, id) => {
+            o[id] = true;
+            return o;
+          }, {})
         }
       };
     }
     case getType(actions.deselectCamStyle): {
       const selectedCamStyles = { ...state.selectedCamStyles };
       delete selectedCamStyles[action.payload];
+      return {
+        ...state,
+        selectedCamStyles
+      };
+    }
+    case getType(actions.selectCam): {
+      const selectedCamStyles = { ...state.selectedCamStyles };
+      const { camStyleId } = state.entities.cams[action.payload];
+      if (!selectedCamStyles[camStyleId]) {
+        selectedCamStyles[camStyleId] = { [action.payload]: true };
+      } else {
+        selectedCamStyles[camStyleId] = {
+          ...selectedCamStyles[camStyleId],
+          [action.payload]: true
+        };
+      }
+      return {
+        ...state,
+        selectedCamStyles
+      };
+    }
+    case getType(actions.deselectCam): {
+      const { camStyleId } = state.entities.cams[action.payload];
+      const selectedCamStyles = {
+        ...state.selectedCamStyles,
+        [camStyleId]: Object.keys(state.selectedCamStyles[camStyleId]).reduce(
+          (o, camId) => {
+            if (Number(camId) !== action.payload) {
+              o[camId] = true;
+            }
+            return o;
+          },
+          {}
+        )
+      };
       return {
         ...state,
         selectedCamStyles
