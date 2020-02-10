@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Accordion, Menu } from "semantic-ui-react";
+import { Accordion, Menu, Icon } from "semantic-ui-react";
 import {
   RootState,
   CamStyle,
@@ -30,9 +30,10 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
         const active = activeAccordions[camStyle.id];
         return (
           <Menu.Item key={camStyle.id}>
+            <CamStyleCheckbox {...camStyle} /> 
             <Accordion.Title
               active={active}
-              content={<CamStyleCheckbox {...camStyle} />}
+              content={camStyle.name}
               onClick={() => {
                 const newActiveAccordions = { ...activeAccordions };
                 if (active) {

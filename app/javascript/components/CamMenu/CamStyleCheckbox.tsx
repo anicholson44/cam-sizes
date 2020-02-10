@@ -1,14 +1,28 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Checkbox } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 import { actions, RootState, CamStyle } from "../../store";
 
-const CamStyleCheckbox = ({ name, id }: CamStyle) => {
-    const dispatch = useDispatch();
-    const checked = useSelector<RootState, boolean>(({ selectedCamStyles }) => !!selectedCamStyles[id]);
+const CamStyleCheckbox = ({ id }: CamStyle) => {
+  const dispatch = useDispatch();
+  const checked = useSelector<RootState, boolean>(
+    ({ selectedCamStyles }) => !!selectedCamStyles[id]
+  );
 
-    const onChange = () => dispatch(checked ? actions.deselectCamStyle(id) : actions.selectCamStyle(id));
-    return <Checkbox label={name} onChange={onChange} checked={checked} />;
+  const onClick = () =>
+    dispatch(
+      checked ? actions.deselectCamStyle(id) : actions.selectCamStyle(id)
+    );
+  return (
+    <Icon
+      onClick={onClick}
+      name={checked ? "minus" : "plus"}
+      style={{
+        float: "left",
+        margin: "0 1em 0 0"
+      }}
+    />
+  );
 };
 
 export default CamStyleCheckbox;
