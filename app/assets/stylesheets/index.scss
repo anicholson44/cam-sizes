@@ -12,6 +12,25 @@
   width: 100%;
 }
 
+#rack-container {
+  width: 250px;
+  margin: 0px 20px;
+  text-align: center;
+  #rack {
+    height: 100%;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+div.stats {
+  padding: 3px 3px;
+  :first-child {
+    font-weight: 600;
+    margin-right: 5px;
+  }
+}
+
 #header {
   display: flex;
   justify-content: center;
@@ -35,16 +54,18 @@
       margin-bottom: 1px;
       cursor: pointer;
     }
-    .cam-name-and-color {
-      display: flex;
-      align-items: center;
-      > * {
-        margin: 3px;
-      }
-      .cam-color-preview {
-        width: 1em;
-        height: 1em;
-      }
-    }
   }
+}
+
+.cam-name-and-color {
+  display: flex;
+  align-items: center;
+  > * {
+    margin: 3px;
+  }
+}
+
+.cam-color-preview {
+  width: 1em;
+  height: 1em;
 }

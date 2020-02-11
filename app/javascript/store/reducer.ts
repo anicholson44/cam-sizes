@@ -84,5 +84,5 @@ const reducer = (
   }
 };
 
-export default initialState => (state = initialState, action) =>
+export default (initialState: RootState) => (state = initialState, action: RootAction) =>
   reducer(state, action);

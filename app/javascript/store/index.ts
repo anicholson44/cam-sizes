@@ -9,6 +9,8 @@ import localStorageMiddleware, { rootStateStorage } from "./middleware/local-sto
 
 export { default as actions } from "./actions";
 export * from "./types";
+import * as selectors from "./selectors";
+export { selectors };
 
 const epicMiddleware = createEpicMiddleware();
 

@@ -6,6 +6,7 @@ import "semantic-ui-css/semantic.min.css";
 import store, { actions } from "../store";
 import CamMenu from "./CamMenu";
 import CamChart from "./CamChart";
+import Rack from "./Rack";
 
 const App = () => {
   useEffect(() => {
@@ -24,6 +25,9 @@ const App = () => {
           </div>
           <div id="chart-container">
             <CamChart />
+          </div>
+          <div id="rack-container">
+            <Rack />
           </div>
         </div>
       </div>
