@@ -15,7 +15,7 @@ export { selectors };
 const epicMiddleware = createEpicMiddleware();
 
 const store = createStore(
-  reducer(rootStateStorage.get()),
+  reducer(rootStateStorage.get() || undefined),
   composeWithDevTools(
     applyMiddleware(camelize(), epicMiddleware, localStorageMiddleware)
   )
