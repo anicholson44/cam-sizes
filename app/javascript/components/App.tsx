@@ -17,7 +17,7 @@ const App = () => {
     <Provider store={store}>
       <div>
         <header id="header">
-          <Header as="h1">Cam Size Comparison</Header>
+          <Header as="h1">Compare Cams</Header>
         </header>
         <div id="container">
           <div id="menu-container">
