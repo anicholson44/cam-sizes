@@ -13,14 +13,37 @@
 }
 
 #rack-container {
-  width: 250px;
+  width: 300px;
   margin: 0px 20px;
   text-align: center;
   #rack {
     height: 100%;
     width: 100%;
     text-align: left;
+    .rack-cam {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
+}
+
+.ticker {
+  display: flex;
+  align-items: center;
+  .plus-minus {
+    margin: 3px 0 0 2px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.number-with-square {
+  border: 1px solid black;
+  border-radius: 3px;
+  width: 18px;
+  height: 18px;
+  text-align: center;
 }
 
 div.stats {
@@ -52,9 +75,13 @@ div.stats {
     > i.icon.plus,
     i.icon.minus {
       margin-bottom: 1px;
-      cursor: pointer;
     }
   }
+}
+
+i.icon.plus,
+i.icon.minus {
+  cursor: pointer;
 }
 
 .cam-name-and-color {

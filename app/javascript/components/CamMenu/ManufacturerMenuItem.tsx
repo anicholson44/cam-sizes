@@ -54,7 +54,7 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
                       {...cams[id]}
                       selected={
                         selectedCamStyles[camStyle.id] &&
-                        selectedCamStyles[camStyle.id][id]
+                        !!selectedCamStyles[camStyle.id][id]
                       }
                     />
                   ))}

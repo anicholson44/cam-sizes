@@ -52,7 +52,8 @@ export interface IdStore<V> {
 // Store selected cam styles and selected cams in a nested data structure. The top-level keys
 // are cam style ids. The top-level values are id stores of selected cam ids for those cam style
 // ids. This support the select all, deselect all, select, and deselect actions for cams.
-export type SelectedCamStyles = IdStore<IdStore<true>>;
+// The number represents the number of a particular cam in the rack.
+export type SelectedCamStyles = IdStore<IdStore<number>>;
 
 export interface RootState {
   readonly entities: EntitiesState;

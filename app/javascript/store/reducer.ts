@@ -29,7 +29,7 @@ const reducer = (
           [action.payload]: state.entities.camStyles[
             action.payload
           ].cams.reduce((o, id) => {
-            o[id] = true;
+            o[id] = 1;
             return o;
           }, {})
         }
@@ -47,11 +47,12 @@ const reducer = (
       const selectedCamStyles = { ...state.selectedCamStyles };
       const { camStyleId } = state.entities.cams[action.payload];
       if (!selectedCamStyles[camStyleId]) {
-        selectedCamStyles[camStyleId] = { [action.payload]: true };
+        selectedCamStyles[camStyleId] = { [action.payload]: 1 };
       } else {
         selectedCamStyles[camStyleId] = {
           ...selectedCamStyles[camStyleId],
-          [action.payload]: true
+          [action.payload]:
+            (selectedCamStyles[camStyleId][action.payload] || 0) + 1
         };
       }
       return {
@@ -66,7 +67,9 @@ const reducer = (
         [camStyleId]: Object.keys(state.selectedCamStyles[camStyleId]).reduce(
           (o, camId) => {
             if (Number(camId) !== action.payload) {
-              o[camId] = true;
+              o[camId] = state.selectedCamStyles[camStyleId][camId];
+            } else if (state.selectedCamStyles[camStyleId][camId] > 1) {
+              o[camId] = state.selectedCamStyles[camStyleId][camId] - 1;
             }
             return o;
           },
@@ -84,5 +87,7 @@ const reducer = (
   }
 };
 
-export default (initialState: RootState) => (state = initialState, action: RootAction) =>
-  reducer(state, action);
+export default (initialState: RootState) => (
+  state = initialState,
+  action: RootAction
+) => reducer(state, action);
