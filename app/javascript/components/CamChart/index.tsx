@@ -21,7 +21,7 @@ const tickDistance_pixels = millimetersToPixels * tickDistance_mm;
 const xTicks = Array.from({ length: numXTicks }, (_, i) => (
   <XAxisTick
     x={i * tickDistance_pixels}
-    label={`${i * tickDistance_mm}mm`}
+    label={`${i * tickDistance_mm / 10}cm`}
     key={i}
   />
 ));
