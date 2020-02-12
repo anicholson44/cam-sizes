@@ -103,6 +103,59 @@ c4s.each do |attrs|
   end
 end
 
+c3 = CamStyle.find_or_create_by!(name: 'Camalot C3') do |c|
+  c.manufacturer_id = black_diamond.id
+end
+
+c3s = [
+  {
+    name: '000',
+    weight: 55,
+    strength: 4,
+    range_min: 7.8,
+    range_max: 12.9,
+    color: 'grey'
+  },
+  {
+    name: '00',
+    weight: 57,
+    strength: 6,
+    range_min: 9,
+    range_max: 13.7,
+    color: 'purple'
+  },
+  {
+    name: '0',
+    range_min: 10.7,
+    range_max: 15.8,
+    weight: 59,
+    strength: 7,
+    color: 'green'
+  },
+  {
+    name: '1',
+    range_min: 12,
+    range_max: 18.8,
+    weight: 62,
+    strength: 10,
+    color: 'red'
+  },
+  {
+    name: '2',
+    range_min: 14.2,
+    range_max: 22.6,
+    weight: 66,
+    strength: 10,
+    color: 'yellow'
+  }
+]
+
+c3s.each do |attrs|
+  Cam.find_or_create_by!(attrs) do |c|
+    c.cam_style_id = c3.id
+  end
+end
+
 x4 = CamStyle.find_or_create_by!(name: 'Camalot X4') do |c|
   c.manufacturer_id = black_diamond.id
 end
