@@ -35,7 +35,7 @@ const Rack = () => {
           {selectedCams.map(({ name, camStyleId, id, color }) => (
             <List.Item key={id}>
               <div className="rack-cam">
-                <div className="cam-name-and-color">
+                <div className="cam-name-and-color" onMouseEnter={() => dispatch(actions.highlightCam(id))} onMouseLeave={() => dispatch(actions.unhighlightCam(id))}>
                   <div
                     style={{ backgroundColor: color }}
                     className="cam-color-preview"
