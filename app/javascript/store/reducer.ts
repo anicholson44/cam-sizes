@@ -68,12 +68,29 @@ const reducer = (
         selectedCams
       };
     }
-    // case getType(actions.highlightCamStyle): {
-    //   return {
-    //     ...state,
-    //     highlightedCams: state.entities.camStyles[action.payload].cams
-    //   }
-    // }
+    case getType(actions.highlightCamStyle): {
+      const { cams } = state.entities.camStyles[action.payload];
+      return {
+        ...state,
+        highlightedCams: {
+          ...state.highlightedCams,
+          ...cams.reduce((o, id) => {
+            o[id] = true;
+            return o;
+          }, {})
+        }
+      };
+    }
+    case getType(actions.unhighlightCamStyle): {
+      const { cams } = state.entities.camStyles[action.payload];
+      const highlightedCams = {};
+      Object.assign(highlightedCams, state.highlightedCams);
+      cams.forEach(id => delete highlightedCams[id]);
+      return {
+        ...state,
+        highlightedCams
+      };
+    }
     case getType(actions.highlightCam): {
       return {
         ...state,

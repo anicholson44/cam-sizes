@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Accordion, Menu } from "semantic-ui-react";
-import { RootState, CamStyle, EntityMap, Cam, IdStore } from "../../store";
+import { RootState, CamStyle, EntityMap, Cam, IdStore, actions } from "../../store";
 import CamStyleCheckbox from "./CamStyleCheckbox";
 import CamMenuItem from "./CamMenuItem";
 
@@ -12,10 +12,8 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
   const cams = useSelector<RootState, EntityMap<Cam>>(
     ({ entities }) => entities.cams
   );
-  const selectedCams = useSelector<RootState, IdStore<number>>(
-    ({ selectedCams }) => selectedCams
-  );
   const [activeAccordions, setActiveAccordions] = useState<IdStore<true>>({});
+  const dispatch = useDispatch();
 
   return (
     <Accordion as={Menu} vertical>
@@ -36,6 +34,8 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
                 }
                 setActiveAccordions(newActiveAccordions);
               }}
+              onMouseEnter={() => dispatch(actions.highlightCamStyle(camStyle.id))}
+              onMouseLeave={() => dispatch(actions.unhighlightCamStyle(camStyle.id))}
             />
             <Accordion.Content
               active={active}
