@@ -1,6 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { RootState, Cam, EntityMap, CamStyle, selectors } from "../../store";
+import {
+  RootState,
+  Cam,
+  EntityMap,
+  CamStyle,
+  selectors,
+  IdStore
+} from "../../store";
 import XAxisTick from "./XAxisTick";
 import CamRect from "./CamRect";
 
@@ -21,7 +28,7 @@ const tickDistance_pixels = millimetersToPixels * tickDistance_mm;
 const xTicks = Array.from({ length: numXTicks }, (_, i) => (
   <XAxisTick
     x={i * tickDistance_pixels}
-    label={`${i * tickDistance_mm / 10}cm`}
+    label={`${(i * tickDistance_mm) / 10}cm`}
     key={i}
   />
 ));
@@ -37,8 +44,12 @@ const CamChart = () => {
   const camStyles = useSelector<RootState, EntityMap<CamStyle>>(
     ({ entities }) => entities.camStyles
   );
+  const highlightedCams = useSelector<RootState, IdStore<true>>(
+    ({ highlightedCams }) => highlightedCams
+  );
+
   const camRects = selectedCams.map(
-    ({ color, rangeMin, rangeMax, name, camStyleId }, i) => (
+    ({ id, color, rangeMin, rangeMax, name, camStyleId }, i) => (
       <CamRect
         key={i}
         color={color}
@@ -47,6 +58,9 @@ const CamChart = () => {
         width={millimetersToPixels * (rangeMax - rangeMin)}
         index={i}
         label={`${camStyles[camStyleId].name} ${name}`}
+        blurred={
+          Object.values(highlightedCams).length > 0 && !highlightedCams[id]
+        }
       />
     )
   );

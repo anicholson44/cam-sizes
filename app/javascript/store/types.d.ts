@@ -1,5 +1,8 @@
 import { StateType, ActionType } from "typesafe-actions";
 import { Epic } from "redux-observable";
+import { IdStore } from "../utils/id-store";
+
+export { IdStore };
 
 export type RootAction = ActionType<typeof import("./actions").default>;
 
@@ -43,12 +46,6 @@ export interface EntitiesState {
   readonly cams: EntityMap<Cam>;
 }
 
-// efficient data structure for storing a set of ids, because objects are easier to work with
-// than sets in JavaScript
-export interface IdStore<V> {
-  readonly [id: number]: V;
-}
-
 // Store selected cam styles and selected cams in a nested data structure. The top-level keys
 // are cam style ids. The top-level values are id stores of selected cam ids for those cam style
 // ids. This support the select all, deselect all, select, and deselect actions for cams.
@@ -58,6 +55,7 @@ export type SelectedCamStyles = IdStore<IdStore<number>>;
 export interface RootState {
   readonly entities: EntitiesState;
   readonly selectedCamStyles: SelectedCamStyles;
+  readonly highlightedCams: IdStore<true>;
 }
 
 export type RootEpic = Epic<

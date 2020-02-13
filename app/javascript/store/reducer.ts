@@ -2,6 +2,7 @@ import { getType } from "typesafe-actions";
 
 import { RootState, RootAction } from "./types";
 import actions from "./actions";
+import idStore from "../utils/id-store";
 
 const defaultState: RootState = {
   entities: {
@@ -9,7 +10,8 @@ const defaultState: RootState = {
     camStyles: {},
     cams: {}
   },
-  selectedCamStyles: {}
+  selectedCamStyles: {},
+  highlightedCams: {}
 };
 
 const reducer = (
@@ -83,6 +85,27 @@ const reducer = (
       return {
         ...state,
         selectedCamStyles
+      };
+    }
+    // case getType(actions.highlightCamStyle): {
+    //   return {
+    //     ...state,
+    //     highlightedCams: state.entities.camStyles[action.payload].cams
+    //   }
+    // }
+    case getType(actions.highlightCam): {
+      return {
+        ...state,
+        highlightedCams: idStore(state.highlightedCams).set(
+          action.payload,
+          true
+        )
+      };
+    }
+    case getType(actions.unhighlightCam): {
+      return {
+        ...state,
+        highlightedCams: idStore(state.highlightedCams).delete(action.payload)
       };
     }
     default: {

@@ -9,7 +9,8 @@ const CamRect = ({
   x,
   width,
   index,
-  label
+  label,
+  blurred
 }: {
   color: string;
   stroke: string;
@@ -17,6 +18,7 @@ const CamRect = ({
   width: number;
   index: number;
   label: string;
+  blurred: boolean;
 }) => (
   <>
     <rect
@@ -26,6 +28,7 @@ const CamRect = ({
       width={width}
       y={index * (height + padding)}
       height={height}
+      opacity={blurred ? .3 : 1}
     />
     <text
       x={x + width + 5}

@@ -18,10 +18,17 @@ const CamMenuItem = ({
   const onClick = () =>
     dispatch(selected ? actions.deselectCam(id) : actions.selectCam(id));
 
+  const onHover = () => dispatch(actions.highlightCam(id));
+  const onMouseLeave = () => dispatch(actions.unhighlightCam(id));
+
   return (
     <div className="cam-menu-item">
       <Icon name={selected ? "minus" : "plus"} onClick={onClick} />
-      <div className="cam-name-and-color">
+      <div
+        className="cam-name-and-color"
+        onMouseEnter={onHover}
+        onMouseLeave={onMouseLeave}
+      >
         <span>{name}</span>
         <div
           style={{ backgroundColor: color }}
