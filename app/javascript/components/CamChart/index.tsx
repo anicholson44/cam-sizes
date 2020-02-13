@@ -34,7 +34,10 @@ const xTicks = Array.from({ length: numXTicks }, (_, i) => (
 ));
 
 const CamChart = () => {
-  const selectedCams = useSelector<RootState, Cam[]>(selectors.getSelectedCams);
+  const cams = useSelector(selectors.getCams);
+  const selectedCams = Object.keys(useSelector(selectors.getSelectedCams)).map(
+    id => cams[Number(id)]
+  );
   selectedCams.sort((first, second) => {
     return (
       (first.rangeMax + first.rangeMin) / 2 -

@@ -4,8 +4,12 @@ import { Header, Segment, List, Icon } from "semantic-ui-react";
 import { selectors, actions } from "../../store";
 
 const Rack = () => {
-  const selectedCams = useSelector(selectors.getSelectedCams);
-  const weight = selectedCams.reduce((w, cam) => w + cam.weight * cam.count, 0).toFixed(1);
+  const selectedCamIds = useSelector(selectors.getSelectedCams);
+  const cams = useSelector(selectors.getCams);
+  const selectedCams = Object.keys(selectedCamIds).map(id => cams[Number(id)]);
+  const weight = selectedCams
+    .reduce((w, cam) => w + cam.weight * selectedCamIds[cam.id], 0)
+    .toFixed(1);
   const camStyles = useSelector(selectors.getCamStyles);
   const dispatch = useDispatch();
 
@@ -28,7 +32,7 @@ const Rack = () => {
               Please select cams from the lefthand menu.
             </div>
           )}
-          {selectedCams.map(({ name, camStyleId, id, color, count }) => (
+          {selectedCams.map(({ name, camStyleId, id, color }) => (
             <List.Item key={id}>
               <div className="rack-cam">
                 <div className="cam-name-and-color">
@@ -41,7 +45,7 @@ const Rack = () => {
                   </span>
                 </div>
                 <div className="ticker">
-                  <div className="number-with-square">{count}</div>
+                  <div className="number-with-square">{selectedCamIds[id]}</div>
                   <div className="plus-minus">
                     <Icon
                       size="small"

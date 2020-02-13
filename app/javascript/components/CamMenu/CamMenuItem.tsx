@@ -1,19 +1,19 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "semantic-ui-react";
 import { actions } from "../../store";
+import { getSelectedCams } from "../../store/selectors";
 
 const CamMenuItem = ({
   id,
   name,
-  color,
-  selected
+  color
 }: {
   id: number;
   name: string;
   color: string;
-  selected: boolean;
 }) => {
+  const selected = useSelector(getSelectedCams)[id];
   const dispatch = useDispatch();
   const onClick = () =>
     dispatch(selected ? actions.deselectCam(id) : actions.selectCam(id));

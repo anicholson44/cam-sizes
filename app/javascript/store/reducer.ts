@@ -10,7 +10,7 @@ const defaultState: RootState = {
     camStyles: {},
     cams: {}
   },
-  selectedCamStyles: {},
+  selectedCams: {},
   highlightedCams: {}
 };
 
@@ -24,13 +24,12 @@ const reducer = (
       return { ...state, entities };
     }
     case getType(actions.selectCamStyle): {
+      const { cams } = state.entities.camStyles[action.payload];
       return {
         ...state,
-        selectedCamStyles: {
-          ...state.selectedCamStyles,
-          [action.payload]: state.entities.camStyles[
-            action.payload
-          ].cams.reduce((o, id) => {
+        selectedCams: {
+          ...state.selectedCams,
+          ...cams.reduce((o, id) => {
             o[id] = 1;
             return o;
           }, {})
@@ -38,53 +37,35 @@ const reducer = (
       };
     }
     case getType(actions.deselectCamStyle): {
-      const selectedCamStyles = { ...state.selectedCamStyles };
-      delete selectedCamStyles[action.payload];
+      const { cams } = state.entities.camStyles[action.payload];
+      const selectedCams = {};
+      Object.assign(selectedCams, state.selectedCams);
+      cams.forEach(id => delete selectedCams[id]);
       return {
         ...state,
-        selectedCamStyles
+        selectedCams
       };
     }
     case getType(actions.selectCam): {
-      const selectedCamStyles = { ...state.selectedCamStyles };
-      const { camStyleId } = state.entities.cams[action.payload];
-      if (!selectedCamStyles[camStyleId]) {
-        selectedCamStyles[camStyleId] = { [action.payload]: 1 };
-      } else {
-        selectedCamStyles[camStyleId] = {
-          ...selectedCamStyles[camStyleId],
-          [action.payload]:
-            (selectedCamStyles[camStyleId][action.payload] || 0) + 1
-        };
-      }
       return {
         ...state,
-        selectedCamStyles
+        selectedCams: {
+          ...state.selectedCams,
+          [action.payload]: (state.selectedCams[action.payload] || 0) + 1
+        }
       };
     }
     case getType(actions.deselectCam): {
-      const { camStyleId } = state.entities.cams[action.payload];
-      const selectedCams = Object.keys(
-        state.selectedCamStyles[camStyleId]
-      ).reduce((o, camId) => {
-        if (Number(camId) !== action.payload) {
-          o[camId] = state.selectedCamStyles[camStyleId][camId];
-        } else if (state.selectedCamStyles[camStyleId][camId] > 1) {
-          o[camId] = state.selectedCamStyles[camStyleId][camId] - 1;
-        }
-        return o;
-      }, {});
-      const selectedCamStyles = {
-        ...state.selectedCamStyles
-      };
-      if (Object.values(selectedCams).length > 0) {
-        selectedCamStyles[camStyleId] = selectedCams;
+      const selectedCams = {};
+      Object.assign(selectedCams, state.selectedCams);
+      if (selectedCams[action.payload] > 1) {
+        selectedCams[action.payload] -= 1;
       } else {
-        delete selectedCamStyles[camStyleId];
+        delete selectedCams[action.payload];
       }
       return {
         ...state,
-        selectedCamStyles
+        selectedCams
       };
     }
     // case getType(actions.highlightCamStyle): {

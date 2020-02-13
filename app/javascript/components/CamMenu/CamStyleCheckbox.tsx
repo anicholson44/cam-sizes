@@ -1,13 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "semantic-ui-react";
-import { actions, RootState, CamStyle } from "../../store";
+import { actions, CamStyle } from "../../store";
+import { getCamsStyleSelected } from "../../store/selectors";
 
 const CamStyleCheckbox = ({ id }: CamStyle) => {
   const dispatch = useDispatch();
-  const checked = useSelector<RootState, boolean>(
-    ({ selectedCamStyles }) => !!selectedCamStyles[id]
-  );
+  const checked = useSelector(getCamsStyleSelected(id));
 
   const onClick = () =>
     dispatch(
