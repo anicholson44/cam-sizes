@@ -2,7 +2,6 @@ import { getType } from "typesafe-actions";
 
 import { RootState, RootAction } from "./types";
 import actions from "./actions";
-import idStore from "../utils/id-store";
 
 const defaultState: RootState = {
   entities: {
@@ -75,7 +74,9 @@ const reducer = (
         highlightedCams: {
           ...state.highlightedCams,
           ...cams.reduce((o, id) => {
-            o[id] = true;
+            if (state.selectedCams[id]) {
+              o[id] = true;
+            }
             return o;
           }, {})
         }
@@ -92,18 +93,23 @@ const reducer = (
       };
     }
     case getType(actions.highlightCam): {
+      const highlightedCams = {};
+      Object.assign(highlightedCams, state.highlightedCams);
+      if (state.selectedCams[action.payload]) {
+        highlightedCams[action.payload] = true;
+      }
       return {
         ...state,
-        highlightedCams: idStore(state.highlightedCams).set(
-          action.payload,
-          true
-        )
+        highlightedCams
       };
     }
     case getType(actions.unhighlightCam): {
+      const highlightedCams = {};
+      Object.assign(highlightedCams, state.highlightedCams);
+      delete highlightedCams[action.payload];
       return {
         ...state,
-        highlightedCams: idStore(state.highlightedCams).delete(action.payload)
+        highlightedCams
       };
     }
     default: {
