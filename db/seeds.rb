@@ -103,6 +103,71 @@ c4s.each do |attrs|
   end
 end
 
+z4s = [
+  {
+    name: '0',
+    color: 'green',
+    weight: 43,
+    strength: 5,
+    range_min: 7.5,
+    range_max: 11.8
+  },
+  {
+    name: '.1',
+    color: 'red',
+    weight: 45,
+    strength: 5,
+    range_min: 8.8,
+    range_max: 13.8
+  },
+  {
+    name: '.2',
+    color: 'yellow',
+    weight: 48,
+    strength: 6,
+    range_min: 10.4,
+    range_max: 16.3
+  },
+  {
+    name: '.3',
+    color: 'blue',
+    weight: 54,
+    strength: 8,
+    range_min: 12.4,
+    range_max: 22.6
+  },
+  {
+    name: '.4',
+    color: 'grey',
+    weight: 61,
+    strength: 9,
+    range_min: 15.3,
+    range_max: 27.7
+  },
+  {
+    name: '.5',
+    color: 'purple',
+    weight: 77,
+    strength: 10,
+    range_min: 18.8,
+    range_max: 33.9
+  },
+  {
+    name: '.75',
+    color: 'green',
+    weight: 93,
+    strength: 10,
+    range_min: 23.1,
+    range_max: 42.1
+  }
+]
+
+z4s.each do |attrs|
+  Cam.find_or_create_by!(attrs) do |c|
+    c.cam_style_id = z4.id
+  end
+end
+
 c3 = CamStyle.find_or_create_by!(name: 'Camalot C3') do |c|
   c.manufacturer_id = black_diamond.id
 end
@@ -435,7 +500,7 @@ tcus = [
     range_max: 33.5,
     strength: 10,
     weight: 68
-  },
+  }
 ]
 
 tcus.each do |attrs|
