@@ -103,6 +103,75 @@ c4s.each do |attrs|
   end
 end
 
+ultralight = CamStyle.find_or_create_by!(name: 'C4 Ultralight') do |c|
+  c.manufacturer_id = black_diamond.id
+end
+
+ultralights = [
+      {
+        name: '.4',
+        color: 'grey',
+        weight: 61,
+        strength: 8,
+        range_min: 15.5,
+        range_max: 26.7,
+      },
+      {
+        name: '.5',
+        color: 'purple',
+        weight: 74,
+        strength: 10,
+        range_min: 19.6,
+        range_max: 33.5,
+      },
+      {
+        name: '.75',
+        color: 'green',
+        weight: 89,
+        strength: 12,
+        range_min: 23.9,
+        range_max: 41.2,
+      },
+      {
+        name: '#1',
+        color: 'red',
+        weight: 101,
+        strength: 12,
+        range_min: 30.2,
+        range_max: 52.1,
+      },
+      {
+        name: '#2',
+        color: 'yellow',
+        weight: 126,
+        strength: 12,
+        range_min: 37.2,
+        range_max: 64.9,
+      },
+      {
+        name: '#3',
+        color: 'blue',
+        weight: 167,
+        strength: 12,
+        range_min: 50.7,
+        range_max: 87.9,
+      },
+      {
+        name: '#4',
+        color: 'grey',
+        weight: 225,
+        strength: 12,
+        range_min: 66,
+        range_max: 114.7,
+      }
+]
+
+ultralights.each do |attrs|
+  Cam.find_or_create_by!(attrs) do |c|
+    c.cam_style_id = ultralight.id
+  end
+end
+
 z4s = [
   {
     name: '0',
