@@ -641,3 +641,65 @@ dragonflies.each do |attrs|
   end
 end
 
+fixe = Manufacturer.find_or_create_by!(name: 'Fixe')
+
+alien_lite = CamStyle.find_or_create_by!(name: 'Alien LITE') do |c|
+  c.manufacturer_id = fixe.id
+end
+
+alien_lites = [
+      {
+        name: '1/3',
+        color: 'black',
+        strength: 5,
+        weight: 46,
+        range_min: 8,
+        range_max: 14,
+      },
+      {
+        name: '3/8',
+        color: 'blue',
+        strength: 6,
+        weight: 48,
+        range_min: 10,
+        range_max: 17,
+      },
+      {
+        name: '1/2',
+        color: 'green',
+        strength: 7,
+        weight: 52,
+        range_min: 13,
+        range_max: 22,
+      },
+      {
+        name: '3/4',
+        color: 'yellow',
+        strength: 10,
+        weight: 58,
+        range_min: 15,
+        range_max: 25,
+      },
+      {
+        name: '7/8',
+        color: 'grey',
+        strength: 10,
+        weight: 59,
+        range_min: 17,
+        range_max: 30,
+      },
+      {
+        name: '#1',
+        color: 'red',
+        strength: 10,
+        weight: 61,
+        range_min: 20,
+        range_max: 33,
+      },
+]
+
+alien_lites.each do |attrs|
+  Cam.find_or_create_by!(attrs) do |c|
+    c.cam_style_id = alien_lite.id
+  end
+end
