@@ -8,8 +8,8 @@ export const getCamStyles = (state: RootState) => getEntities(state).camStyles;
 
 export const getCamsStyleSelected = (id: number) => (state: RootState): boolean =>
   getCamStyles(state)[id].cams.reduce(
-    (selected, camId) => selected && !!getSelectedCams(state)[camId],
-    true
+    (selected, camId) => selected || !!getSelectedCams(state)[camId],
+    false
   );
 
 export const getSelectedCams = (state: RootState): IdStore<number> =>
