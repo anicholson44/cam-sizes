@@ -577,3 +577,67 @@ tcus.each do |attrs|
     c.cam_style_id = tcu.id
   end
 end
+
+dmm = Manufacturer.find_or_create_by!(name: 'DMM')
+
+dragonfly = CamStyle.find_or_create_by!(name: 'Dragonfly') do |c|
+  c.manufacturer_id = dmm.id
+end
+
+dragonflies = [
+      {
+        name: '#1',
+        color: 'green',
+        strength: 6,
+        weight: 55,
+        range_min: 7.8,
+        range_max: 11,
+      },
+      {
+        name: '#2',
+        color: 'red',
+        strength: 6,
+        weight: 56,
+        range_min: 8.7,
+        range_max: 12.9,
+      },
+      {
+        name: '#3',
+        color: 'gold',
+        strength: 8,
+        weight: 65,
+        range_min: 10.2,
+        range_max: 15.2,
+      },
+      {
+        name: '#4',
+        color: 'blue',
+        strength: 8,
+        weight: 67,
+        range_min: 12.1,
+        range_max: 17.9,
+      },
+      {
+        name: '#5',
+        color: 'silver',
+        strength: 9,
+        weight: 70,
+        range_min: 15.1,
+        range_max: 22.5,
+      },
+      {
+        name: '#6',
+        color: 'purple',
+        strength: 9,
+        weight: 73,
+        range_min: 19,
+        range_max: 28.3,
+      },
+]
+
+dragonflies.each do |attrs|
+  Cam.find_or_create_by!(attrs) do |c|
+    c.cam_style_id = dragonfly.id
+  end
+end
+
