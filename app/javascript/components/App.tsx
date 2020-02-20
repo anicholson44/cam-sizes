@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import { Header } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
 
 import store, { actions } from "../store";
 import CamMenu from "./CamMenu";
