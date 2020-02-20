@@ -172,6 +172,10 @@ ultralights.each do |attrs|
   end
 end
 
+z4 = CamStyle.find_or_create_by!(name: 'Camalot Z4') do |c|
+  c.manufacturer_id = black_diamond.id
+end
+
 z4s = [
   {
     name: '0',
