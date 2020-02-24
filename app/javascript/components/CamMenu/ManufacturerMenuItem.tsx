@@ -35,7 +35,7 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
                 setActiveAccordions(newActiveAccordions);
               }}
               onMouseEnter={() => dispatch(actions.highlightCamStyle(camStyle.id))}
-              onMouseLeave={() => dispatch(actions.unhighlightCamStyle(camStyle.id))}
+              onMouseLeave={() => dispatch(actions.unhighlightCams())}
             />
             <Accordion.Content
               active={active}

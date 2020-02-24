@@ -1,11 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   RootState,
   EntityMap,
   CamStyle,
   selectors,
-  IdStore
+  IdStore,
+  actions
 } from "../../store";
 import XAxisTick from "./XAxisTick";
 import CamRect from "./CamRect";
@@ -49,6 +50,7 @@ const CamChart = () => {
   const highlightedCams = useSelector<RootState, IdStore<true>>(
     ({ highlightedCams }) => highlightedCams
   );
+  const dispatch = useDispatch();
 
   const camRects = selectedCams.map(
     ({ id, color, rangeMin, rangeMax, name, camStyleId }, i) => (
@@ -60,6 +62,8 @@ const CamChart = () => {
         width={millimetersToPixels * (rangeMax - rangeMin)}
         index={i}
         label={`${camStyles[camStyleId].name} ${name}`}
+        onHover={() => dispatch(actions.highlighOverlappingCams(id))}
+        onMouseLeave={() => dispatch(actions.unhighlightCams())}
         blurred={
           Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
         }

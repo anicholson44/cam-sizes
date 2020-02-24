@@ -10,7 +10,9 @@ const CamRect = ({
   width,
   index,
   label,
-  blurred
+  blurred,
+  onHover,
+  onMouseLeave
 }: {
   color: string;
   stroke: string;
@@ -19,6 +21,8 @@ const CamRect = ({
   index: number;
   label: string;
   blurred: boolean;
+  onHover: () => unknown;
+  onMouseLeave: () => unknown;
 }) => (
   <>
     <rect
@@ -29,6 +33,8 @@ const CamRect = ({
       y={index * (height + padding)}
       height={height}
       opacity={blurred ? .3 : 1}
+      onMouseEnter={onHover}
+      onMouseLeave={onMouseLeave}
     />
     <text
       x={x + width + 5}

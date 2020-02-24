@@ -19,7 +19,7 @@ const CamMenuItem = ({
     dispatch(selected ? actions.deselectCam(id) : actions.selectCam(id));
 
   const onHover = () => dispatch(actions.highlightCam(id));
-  const onMouseLeave = () => dispatch(actions.unhighlightCam(id));
+  const onMouseLeave = () => dispatch(actions.unhighlightCams());
 
   return (
     <div className="cam-menu-item">
