@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {
   RootState,
-  Cam,
   EntityMap,
   CamStyle,
   selectors,
@@ -62,7 +61,7 @@ const CamChart = () => {
         index={i}
         label={`${camStyles[camStyleId].name} ${name}`}
         blurred={
-          Object.values(highlightedCams).length > 0 && !highlightedCams[id]
+          Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
         }
       />
     )

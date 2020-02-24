@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, List, Header } from "semantic-ui-react";
+import { List, Header } from "semantic-ui-react";
 import { useSelector } from "react-redux";
 import { RootState, EntitiesState } from "../../store";
 import ManufacturerMenuItem from "./ManufacturerMenuItem";
@@ -11,10 +11,10 @@ const CamMenu = () => {
 
   return (
     <List>
-      {Object.values(entities.manufacturers).map(({ name, id }) => (
+      {Object.keys(entities.manufacturers).map((id) => (
         <List.Item key={id}>
-          <Header as="h3">{name}</Header>
-          <ManufacturerMenuItem id={id} />
+          <Header as="h3">{entities.manufacturers[id].name}</Header>
+          <ManufacturerMenuItem id={Number(id)} />
         </List.Item>
       ))}
     </List>
