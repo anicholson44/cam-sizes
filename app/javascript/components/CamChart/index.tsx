@@ -50,24 +50,51 @@ const CamChart = () => {
   const highlightedCams = useSelector<RootState, IdStore<true>>(
     ({ highlightedCams }) => highlightedCams
   );
+  const highlightedCamRange = useSelector<RootState, number | void>(
+    ({ highlightedCamRange }) => highlightedCamRange
+  );
   const dispatch = useDispatch();
 
   const camRects = selectedCams.map(
     ({ id, color, rangeMin, rangeMax, name, camStyleId }, i) => (
-      <CamRect
-        key={i}
-        color={color}
-        stroke="black"
-        x={millimetersToPixels * rangeMin}
-        width={millimetersToPixels * (rangeMax - rangeMin)}
-        index={i}
-        label={`${camStyles[camStyleId].name} ${name}`}
-        onHover={() => dispatch(actions.highlighOverlappingCams(id))}
-        onMouseLeave={() => dispatch(actions.unhighlightCams())}
-        blurred={
-          Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
-        }
-      />
+      <>
+        <CamRect
+          key={i}
+          color={color}
+          stroke="black"
+          x={millimetersToPixels * rangeMin}
+          width={millimetersToPixels * (rangeMax - rangeMin)}
+          height={15}
+          padding={1}
+          index={i}
+          label={`${camStyles[camStyleId].name} ${name}`}
+          onHover={() => dispatch(actions.highlightCamRange(id))}
+          onMouseLeave={() => dispatch(actions.unhighlightCamRange())}
+          blurred={
+            Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
+          }
+        />
+        {highlightedCamRange === id && (
+          <>
+            <line
+              x1={millimetersToPixels * rangeMin}
+              x2={millimetersToPixels * rangeMin}
+              y1={paddingY * -1}
+              y2="100%"
+              opacity="25%"
+              stroke="black"
+            />
+            <line
+              x1={millimetersToPixels * rangeMax}
+              x2={millimetersToPixels * rangeMax}
+              y1={paddingY * -1}
+              y2="100%"
+              opacity="25%"
+              stroke="black"
+            />
+          </>
+        )}
+      </>
     )
   );
 

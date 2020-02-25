@@ -2,7 +2,6 @@ import { getType } from "typesafe-actions";
 
 import { RootState, RootAction } from "./types";
 import actions from "./actions";
-import { getSelectedCamsInRange } from "./selectors";
 
 const defaultState: RootState = {
   entities: {
@@ -11,7 +10,8 @@ const defaultState: RootState = {
     cams: {}
   },
   selectedCams: {},
-  highlightedCams: {}
+  highlightedCams: {},
+  highlightedCamRange: undefined
 };
 
 const reducer = (
@@ -94,25 +94,22 @@ const reducer = (
         highlightedCams
       };
     }
-    case getType(actions.highlighOverlappingCams): {
-      const cams = getSelectedCamsInRange(state)(
-        state.entities.cams[action.payload]
-      );
-      return {
-        ...state,
-        highlightedCams: {
-          ...state.highlightedCams,
-          ...cams.reduce((o, { id }) => {
-            o[id] = true;
-            return o;
-          }, {})
-        }
-      };
-    }
     case getType(actions.unhighlightCams): {
       return {
         ...state,
         highlightedCams: {}
+      };
+    }
+    case getType(actions.highlightCamRange): {
+      return {
+        ...state,
+        highlightedCamRange: action.payload
+      };
+    }
+    case getType(actions.unhighlightCamRange): {
+      return {
+        ...state,
+        highlightedCamRange: undefined
       };
     }
     default: {

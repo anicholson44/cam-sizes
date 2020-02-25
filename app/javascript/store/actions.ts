@@ -16,8 +16,10 @@ const deselectCam = createAction("DESELECT_CAM")<number>();
 
 const highlightCamStyle = createAction("HIGHLIGHT_CAM_STYLE")<number>();
 const highlightCam = createAction("HIGHLIGHT_CAM")<number>();
-const highlighOverlappingCams = createAction("HIGHLIGHT_OVERLAPPING_CAMS")<number>();
 const unhighlightCams = createAction("UNHIGHLIGHT_CAMS")<void>();
+
+const highlightCamRange = createAction("HIGHLIGHT_CAM_RANGE")<number>();
+const unhighlightCamRange = createAction("UNHIGHLIGHT_CAM_RANGE")<void>();
 
 export default {
   fetchCamsAsync,
@@ -28,5 +30,6 @@ export default {
   highlightCamStyle,
   highlightCam,
   unhighlightCams,
-  highlighOverlappingCams
+  highlightCamRange,
+  unhighlightCamRange
 };

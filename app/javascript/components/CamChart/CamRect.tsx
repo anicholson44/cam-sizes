@@ -1,13 +1,12 @@
 import React from "react";
 
-const height = 15;
-const padding = 1;
-
 const CamRect = ({
   color,
   stroke,
   x,
   width,
+  height,
+  padding,
   index,
   label,
   blurred,
@@ -18,6 +17,8 @@ const CamRect = ({
   stroke: string;
   x: number;
   width: number;
+  height: number;
+  padding: number;
   index: number;
   label: string;
   blurred: boolean;
@@ -32,9 +33,10 @@ const CamRect = ({
       width={width}
       y={index * (height + padding)}
       height={height}
-      opacity={blurred ? .3 : 1}
+      opacity={blurred ? 0.3 : 1}
       onMouseEnter={onHover}
       onMouseLeave={onMouseLeave}
+      style={{ cursor: "pointer" }}
     />
     <text
       x={x + width + 5}

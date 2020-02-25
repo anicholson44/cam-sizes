@@ -50,6 +50,7 @@ export interface RootState {
   readonly entities: EntitiesState;
   readonly selectedCams: IdStore<number>;
   readonly highlightedCams: IdStore<true>;
+  readonly highlightedCamRange: void | number;
 }
 
 export type RootEpic = Epic<
