@@ -11,7 +11,7 @@ import {
 import XAxisTick from "./XAxisTick";
 import CamRect from "./CamRect";
 
-const height = 770;
+const height = 2000;
 const width = 1200;
 const paddingX = 0;
 const paddingY = 20;
