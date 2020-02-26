@@ -1,5 +1,7 @@
 import React from "react";
 
+import { containerParams } from ".";
+
 const CamRect = ({
   color,
   stroke,
@@ -11,7 +13,8 @@ const CamRect = ({
   label,
   blurred,
   onHover,
-  onMouseLeave
+  onMouseLeave,
+  highlighted,
 }: {
   color: string;
   stroke: string;
@@ -24,6 +27,7 @@ const CamRect = ({
   blurred: boolean;
   onHover: () => unknown;
   onMouseLeave: () => unknown;
+  highlighted?: boolean;
 }) => (
   <>
     <rect
@@ -45,6 +49,26 @@ const CamRect = ({
     >
       {label}
     </text>
+    {highlighted && (
+      <>
+        <line
+          x1={x}
+          x2={x}
+          y1={containerParams.paddingY * -1}
+          y2="100%"
+          opacity="25%"
+          stroke="black"
+        />
+        <line
+          x1={x + width}
+          x2={x + width}
+          y1={containerParams.paddingY * -1}
+          y2="100%"
+          opacity="25%"
+          stroke="black"
+        />
+      </>
+    )}
   </>
 );
 

@@ -25,6 +25,18 @@ const tickDistance_mm = 10;
 const numXTicks = maxX_mm / tickDistance_mm;
 const tickDistance_pixels = millimetersToPixels * tickDistance_mm;
 
+export const containerParams = {
+  height,
+  width,
+  paddingX,
+  paddingY,
+  maxX_mm,
+  millimetersToPixels,
+  tickDistance_mm,
+  numXTicks,
+  tickDistance_pixels
+};
+
 const xTicks = Array.from({ length: numXTicks }, (_, i) => (
   <XAxisTick
     x={i * tickDistance_pixels}
@@ -57,44 +69,23 @@ const CamChart = () => {
 
   const camRects = selectedCams.map(
     ({ id, color, rangeMin, rangeMax, name, camStyleId }, i) => (
-      <>
-        <CamRect
-          key={i}
-          color={color}
-          stroke="black"
-          x={millimetersToPixels * rangeMin}
-          width={millimetersToPixels * (rangeMax - rangeMin)}
-          height={15}
-          padding={1}
-          index={i}
-          label={`${camStyles[camStyleId].name} ${name}`}
-          onHover={() => dispatch(actions.highlightCamRange(id))}
-          onMouseLeave={() => dispatch(actions.unhighlightCamRange())}
-          blurred={
-            Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
-          }
-        />
-        {highlightedCamRange === id && (
-          <>
-            <line
-              x1={millimetersToPixels * rangeMin}
-              x2={millimetersToPixels * rangeMin}
-              y1={paddingY * -1}
-              y2="100%"
-              opacity="25%"
-              stroke="black"
-            />
-            <line
-              x1={millimetersToPixels * rangeMax}
-              x2={millimetersToPixels * rangeMax}
-              y1={paddingY * -1}
-              y2="100%"
-              opacity="25%"
-              stroke="black"
-            />
-          </>
-        )}
-      </>
+      <CamRect
+        key={i}
+        color={color}
+        stroke="black"
+        x={millimetersToPixels * rangeMin}
+        width={millimetersToPixels * (rangeMax - rangeMin)}
+        height={15}
+        padding={1}
+        index={i}
+        label={`${camStyles[camStyleId].name} ${name}`}
+        onHover={() => dispatch(actions.highlightCamRange(id))}
+        onMouseLeave={() => dispatch(actions.unhighlightCamRange())}
+        blurred={
+          Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
+        }
+        highlighted={highlightedCamRange === id}
+      />
     )
   );
 
