@@ -2,7 +2,12 @@ import React from "react";
 
 import { containerParams } from ".";
 
-const rangeOffset = 40;
+const widthOfRangeLabel = (range) => {
+  const numbers = String(range).replace(".", "").length;
+  const hasDecimal = Number.isInteger(range);
+  return 8 * (numbers + 2) + (hasDecimal ? 5 : 0);
+}
+
 const rangeLabelStyle = { fontSize: 10, opacity: "50%" };
 
 const CamRect = ({
@@ -38,7 +43,7 @@ const CamRect = ({
 }) => {
   const y = index * (height + padding);
   const textY = y + 11;
-  const labelOffset = 5 + (highlightRange ? rangeOffset : 0);
+  const labelOffset = 5 + (highlightRange ? widthOfRangeLabel(rangeMax) : 0);
 
   return (
     <>
@@ -75,7 +80,7 @@ const CamRect = ({
             opacity="25%"
             stroke="black"
           />
-          <text x={x - rangeOffset} y={textY} style={rangeLabelStyle}>
+          <text x={x - widthOfRangeLabel(rangeMin)} y={textY} style={rangeLabelStyle}>
             {rangeMin}mm
           </text>
           <text x={x + width + 5} y={textY} style={rangeLabelStyle}>
