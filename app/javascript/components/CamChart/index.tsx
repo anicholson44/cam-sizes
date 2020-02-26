@@ -84,7 +84,9 @@ const CamChart = () => {
         blurred={
           Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
         }
-        highlighted={highlightedCamRange === id}
+        highlightRange={highlightedCamRange === id}
+        rangeMin={rangeMin}
+        rangeMax={rangeMax}
       />
     )
   );
