@@ -67,28 +67,56 @@ const CamChart = () => {
   );
   const dispatch = useDispatch();
 
+  let camRangeHighlight = null;
   const camRects = selectedCams.map(
-    ({ id, color, rangeMin, rangeMax, name, camStyleId }, i) => (
-      <CamRect
-        key={i}
-        color={color}
-        stroke="black"
-        x={millimetersToPixels * rangeMin}
-        width={millimetersToPixels * (rangeMax - rangeMin)}
-        height={15}
-        padding={1}
-        index={i}
-        label={`${camStyles[camStyleId].name} ${name}`}
-        onHover={() => dispatch(actions.highlightCamRange(id))}
-        onMouseLeave={() => dispatch(actions.unhighlightCamRange())}
-        blurred={
-          Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
-        }
-        highlightRange={highlightedCamRange === id}
-        rangeMin={rangeMin}
-        rangeMax={rangeMax}
-      />
-    )
+    ({ id, color, rangeMin, rangeMax, name, camStyleId }, i) => {
+      const highlightRange = highlightedCamRange === id;
+      const x = millimetersToPixels * rangeMin;
+      const rectWidth = millimetersToPixels * (rangeMax - rangeMin);
+      if (highlightRange) {
+        camRangeHighlight = (
+          <>
+            <line
+              x1={x}
+              x2={x}
+              y1={paddingY * -1}
+              y2="100%"
+              opacity="25%"
+              stroke="black"
+            />
+            <line
+              x1={x + rectWidth}
+              x2={x + rectWidth}
+              y1={paddingY * -1}
+              y2="100%"
+              opacity="25%"
+              stroke="black"
+            />
+          </>
+        );
+      }
+      return (
+        <CamRect
+          key={i}
+          color={color}
+          stroke="black"
+          x={x}
+          width={rectWidth}
+          height={15}
+          padding={1}
+          index={i}
+          label={`${camStyles[camStyleId].name} ${name}`}
+          onHover={() => dispatch(actions.highlightCamRange(id))}
+          onMouseLeave={() => dispatch(actions.unhighlightCamRange())}
+          blurred={
+            Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
+          }
+          highlightRange={highlightedCamRange === id}
+          rangeMin={rangeMin}
+          rangeMax={rangeMax}
+        />
+      );
+    }
   );
 
   return (
@@ -96,7 +124,10 @@ const CamChart = () => {
       <line x1={0} y1={0} x2={0} y2="100%" stroke="black" />
       <line x1={0} y1={0} y2={0} x2="100%" stroke="black" />
       {xTicks}
-      <g transform="translate(0 20)">{camRects}</g>
+      <g transform="translate(0 20)">
+        {camRects}
+        {camRangeHighlight}
+      </g>
     </svg>
   );
 };

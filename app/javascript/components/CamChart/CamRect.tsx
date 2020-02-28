@@ -65,22 +65,6 @@ const CamRect = ({
       </text>
       {highlightRange && (
         <>
-          <line
-            x1={x}
-            x2={x}
-            y1={containerParams.paddingY * -1}
-            y2="100%"
-            opacity="25%"
-            stroke="black"
-          />
-          <line
-            x1={x + width}
-            x2={x + width}
-            y1={containerParams.paddingY * -1}
-            y2="100%"
-            opacity="25%"
-            stroke="black"
-          />
           <text
             x={x - widthOfRangeLabel(rangeMin)}
             y={textY}
