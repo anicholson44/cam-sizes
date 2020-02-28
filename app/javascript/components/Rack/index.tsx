@@ -24,9 +24,6 @@ const Rack = () => {
           <List.Item>{weight}g</List.Item>
         </List>
         <List>
-          <List.Item>
-            <List.Header>Cams:</List.Header>
-          </List.Item>
           {selectedCams.length === 0 && (
             <div style={{ padding: "10px 0 0 0" }}>
               Please select cams from the lefthand menu.
