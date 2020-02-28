@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Header, Segment, List, Icon } from "semantic-ui-react";
+import { Header, Segment, List, Icon, Button } from "semantic-ui-react";
 import { selectors, actions } from "../../store";
+import ClearRackButton from "./ClearRackButton";
 
 const Rack = () => {
   const selectedCamIds = useSelector(selectors.getSelectedCams);
@@ -15,13 +16,20 @@ const Rack = () => {
 
   return (
     <>
-      <Header as="h3">My Rack</Header>
+      <Header as="h3" id="rack-header">
+        My Rack
+      </Header>
       <Segment id="rack">
         <List>
-          <List.Item>
+          <List.Item id="rack-weight">
             <List.Header>Total Weight:</List.Header>
+            {weight}g
           </List.Item>
-          <List.Item>{weight}g</List.Item>
+          {selectedCams.length !== 0 && (
+            <List.Item>
+              <ClearRackButton />
+            </List.Item>
+          )}
         </List>
         <List>
           {selectedCams.length === 0 && (
@@ -32,7 +40,11 @@ const Rack = () => {
           {selectedCams.map(({ name, camStyleId, id, color }) => (
             <List.Item key={id}>
               <div className="rack-cam">
-                <div className="cam-name-and-color" onMouseEnter={() => dispatch(actions.highlightCam(id))} onMouseLeave={() => dispatch(actions.unhighlightCams())}>
+                <div
+                  className="cam-name-and-color"
+                  onMouseEnter={() => dispatch(actions.highlightCam(id))}
+                  onMouseLeave={() => dispatch(actions.unhighlightCams())}
+                >
                   <div
                     style={{ backgroundColor: color }}
                     className="cam-color-preview"

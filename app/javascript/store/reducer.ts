@@ -68,6 +68,12 @@ const reducer = (
         selectedCams
       };
     }
+    case getType(actions.deselectAllCams): {
+      return {
+        ...state,
+        selectedCams: defaultState.selectedCams
+      };
+    }
     case getType(actions.highlightCamStyle): {
       const { cams } = state.entities.camStyles[action.payload];
       return {

@@ -15,7 +15,14 @@
 #rack-container {
   width: 300px;
   margin: 0px 20px;
-  text-align: center;
+  #rack-header {
+    text-align: center;
+  }
+  #rack-weight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   #rack {
     height: 100%;
     width: 100%;
@@ -25,6 +32,17 @@
       align-items: center;
       justify-content: space-between;
     }
+  }
+}
+
+.clear-rack-button {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  text-align: center;
+  padding: 3px 3px;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.5);
   }
 }
 

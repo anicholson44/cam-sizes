@@ -13,6 +13,7 @@ const deselectCamStyle = createAction("DESELECT_CAM_STYLE")<number>();
 
 const selectCam = createAction("SELECT_CAM")<number>();
 const deselectCam = createAction("DESELECT_CAM")<number>();
+const deselectAllCams = createAction("DESELECT_ALL_CAMS")<void>();
 
 const highlightCamStyle = createAction("HIGHLIGHT_CAM_STYLE")<number>();
 const highlightCam = createAction("HIGHLIGHT_CAM")<number>();
@@ -27,6 +28,7 @@ export default {
   deselectCamStyle,
   selectCam,
   deselectCam,
+  deselectAllCams,
   highlightCamStyle,
   highlightCam,
   unhighlightCams,
