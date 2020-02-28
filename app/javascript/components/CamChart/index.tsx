@@ -25,6 +25,9 @@ const tickDistance_mm = 10;
 const numXTicks = maxX_mm / tickDistance_mm;
 const tickDistance_pixels = millimetersToPixels * tickDistance_mm;
 
+const maxY_kn = 750;
+const kilonewtonsToPixels = height / maxY_kn;
+
 export const containerParams = {
   height,
   width,
@@ -68,8 +71,9 @@ const CamChart = () => {
   const dispatch = useDispatch();
 
   let camRangeHighlight = null;
+  let y = 0;
   const camRects = selectedCams.map(
-    ({ id, color, rangeMin, rangeMax, name, camStyleId }, i) => {
+    ({ id, color, rangeMin, rangeMax, name, camStyleId, strength }, i) => {
       const highlightRange = highlightedCamRange === id;
       const x = millimetersToPixels * rangeMin;
       const rectWidth = millimetersToPixels * (rangeMax - rangeMin);
@@ -95,25 +99,29 @@ const CamChart = () => {
           </>
         );
       }
+      const thisY = y;
+      const height = strength * kilonewtonsToPixels;
+      y += height + 1;
       return (
         <CamRect
           key={i}
           color={color}
           stroke="black"
           x={x}
+          y={thisY}
           width={rectWidth}
-          height={15}
-          padding={1}
-          index={i}
+          height={height}
           label={`${camStyles[camStyleId].name} ${name}`}
           onHover={() => dispatch(actions.highlightCamRange(id))}
           onMouseLeave={() => dispatch(actions.unhighlightCamRange())}
           blurred={
             Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
           }
-          highlightRange={highlightedCamRange === id}
+          highlightRange={highlightRange}
           rangeMin={rangeMin}
           rangeMax={rangeMax}
+          strength={strength}
+          showStrength={!highlightedCamRange}
         />
       );
     }

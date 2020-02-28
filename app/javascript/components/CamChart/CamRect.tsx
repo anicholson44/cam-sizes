@@ -1,11 +1,9 @@
 import React from "react";
 
-import { containerParams } from ".";
-
-const widthOfRangeLabel = range => {
-  const numbers = String(range).replace(".", "").length;
-  const hasDecimal = Number.isInteger(range);
-  return 8 * (numbers + 2) + (hasDecimal ? 5 : 0);
+const widthOfLabel = (label: string) => {
+  const length = label.replace(".", "").length;
+  const hasDecimal = label.includes(".");
+  return 8 * length + (hasDecimal ? 5 : 0);
 };
 
 const rangeLabelStyle = { fontSize: 10, opacity: "50%" };
@@ -14,25 +12,25 @@ const CamRect = ({
   color,
   stroke,
   x,
+  y,
   width,
   height,
-  padding,
-  index,
   label,
   blurred,
   onHover,
   onMouseLeave,
   highlightRange,
   rangeMin,
-  rangeMax
+  rangeMax,
+  strength,
+  showStrength
 }: {
   color: string;
   stroke: string;
   x: number;
+  y: number;
   width: number;
   height: number;
-  padding: number;
-  index: number;
   label: string;
   blurred: boolean;
   onHover: () => unknown;
@@ -40,10 +38,11 @@ const CamRect = ({
   highlightRange?: boolean;
   rangeMin: number;
   rangeMax: number;
+  strength: number;
+  showStrength: boolean;
 }) => {
-  const y = index * (height + padding);
-  const textY = y + 11;
-  const labelOffset = 5 + (highlightRange ? widthOfRangeLabel(rangeMax) : 0);
+  const textY = y + height / 2 + 4;
+  const labelOffset = 5 + (highlightRange ? widthOfLabel(rangeMax + "mm") : 0);
 
   return (
     <g
@@ -63,10 +62,10 @@ const CamRect = ({
       <text x={x + width + labelOffset} y={textY} style={{ fontSize: 10 }}>
         {label}
       </text>
-      {highlightRange && (
+      {highlightRange ? (
         <>
           <text
-            x={x - widthOfRangeLabel(rangeMin)}
+            x={x - widthOfLabel(rangeMin + "mm")}
             y={textY}
             style={rangeLabelStyle}
           >
@@ -76,6 +75,16 @@ const CamRect = ({
             {rangeMax}mm
           </text>
         </>
+      ) : (
+        showStrength && (
+          <text
+            x={x - widthOfLabel(strength + "kN")}
+            y={textY}
+            style={rangeLabelStyle}
+          >
+            {strength}kN
+          </text>
+        )
       )}
     </g>
   );
