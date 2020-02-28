@@ -46,7 +46,7 @@ const CamRect = ({
   const labelOffset = 5 + (highlightRange ? widthOfRangeLabel(rangeMax) : 0);
 
   return (
-    <>
+    <g onMouseEnter={onHover} onMouseLeave={onMouseLeave}>
       <rect
         fill={color}
         stroke={stroke}
@@ -55,8 +55,6 @@ const CamRect = ({
         y={y}
         height={height}
         opacity={blurred ? 0.3 : 1}
-        onMouseEnter={onHover}
-        onMouseLeave={onMouseLeave}
         style={{ cursor: "pointer" }}
       />
       <text x={x + width + labelOffset} y={textY} style={{ fontSize: 10 }}>
@@ -88,7 +86,7 @@ const CamRect = ({
           </text>
         </>
       )}
-    </>
+    </g>
   );
 };
 
