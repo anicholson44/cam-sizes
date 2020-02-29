@@ -16,7 +16,7 @@ const App = () => {
     <Provider store={store}>
       <div>
         <header id="header">
-          <Header as="h1">Compare Cams</Header>
+          <Header as="h1">Compare Trad Climbing Cams</Header>
         </header>
         <div id="container">
           <div id="menu-container">
