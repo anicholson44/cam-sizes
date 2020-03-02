@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_05_133047) do
+ActiveRecord::Schema.define(version: 2020_03_02_160809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_02_05_133047) do
     t.float "weight", null: false
     t.float "strength", null: false
     t.string "color", null: false
+    t.string "buy_link"
     t.index ["cam_style_id"], name: "index_cams_on_cam_style_id"
   end
 
