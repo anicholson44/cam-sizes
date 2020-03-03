@@ -27,7 +27,7 @@ c4s = {
     weight: 77.5,
     strength: 9,
     color: 'grey',
-    buy_link: 'https://amzn.to/3cmq030'
+    buy_link: 'https://amzn.to/2TqdDdq'
   },
   '.5' => {
     range_min: 19.6,
@@ -35,7 +35,7 @@ c4s = {
     weight: 93,
     strength: 12,
     color: 'purple',
-    buy_link: 'https://amzn.to/3cmq030'
+    buy_link: 'https://amzn.to/2Ie8KPO'
   },
   '.75' => {
     range_min: 23.9,
