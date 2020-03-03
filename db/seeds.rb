@@ -10,700 +10,592 @@
 
 black_diamond = Manufacturer.find_or_create_by!(name: 'Black Diamond')
 
-c4 = CamStyle.find_or_create_by!(name: 'Camalot C4') do |c|
-  c.manufacturer_id = black_diamond.id
-end
+c4 = seed(CamStyle, { name: 'Camalot C4' }, manufacturer_id: black_diamond.id)
 
-c4s = [
-  {
-    name: '.3',
+c4s = {
+  '.3' => {
     range_min: 13.8,
     range_max: 23.4,
     weight: 69.8,
     strength: 8,
     color: 'blue'
   },
-  {
-    name: '.4',
+  '.4' => {
     range_min: 15.5,
     range_max: 26.7,
     weight: 77.5,
     strength: 9,
     color: 'grey'
   },
-  {
-    name: '.5',
+  '.5' => {
     range_min: 19.6,
     range_max: 33.5,
     weight: 93,
     strength: 12,
     color: 'purple'
   },
-  {
-    name: '.75',
+  '.75' => {
     range_min: 23.9,
     range_max: 41.2,
     weight: 107.5,
     strength: 12,
     color: 'green'
   },
-  {
-    name: '#1',
+  '#1' => {
     range_min: 30.2,
     range_max: 52.1,
     weight: 123.9,
     strength: 12,
     color: 'red'
   },
-  {
-    name: '#2',
+  '#2' => {
     range_min: 37.2,
     range_max: 64.9,
     weight: 140.3,
     strength: 12,
     color: 'yellow'
   },
-  {
-    name: '#3',
+  '#3' => {
     range_min: 50.7,
     range_max: 87.9,
     weight: 181.1,
     strength: 12,
     color: 'blue'
   },
-  {
-    name: '#4',
+  '#4' => {
     weight: 257.8,
     range_min: 66.0,
     range_max: 114.7,
     strength: 14,
     color: 'grey'
   },
-  {
-    name: '#5',
+  '#5' => {
     weight: 348.1,
     range_min: 85.4,
     range_max: 148.5,
     strength: 14,
     color: 'purple'
   },
-  {
-    name: '#6',
+  '#6' => {
     weight: 529.9,
     range_min: 114.1,
     range_max: 195.0,
     strength: 14,
     color: 'green'
   }
-]
+}
 
-c4s.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = c4.id
-  end
+c4s.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: c4.id }, attrs)
 end
 
-ultralight = CamStyle.find_or_create_by!(name: 'C4 Ultralight') do |c|
-  c.manufacturer_id = black_diamond.id
+ultralight = seed(CamStyle, { name: 'C4 Ultralight' }, manufacturer_id: black_diamond.id)
+
+ultralights = {
+  '.4' => {
+    color: 'grey',
+    weight: 61,
+    strength: 8,
+    range_min: 15.5,
+    range_max: 26.7
+  },
+  '.5' => {
+    color: 'purple',
+    weight: 74,
+    strength: 10,
+    range_min: 19.6,
+    range_max: 33.5
+  },
+  '.75' => {
+    color: 'green',
+    weight: 89,
+    strength: 12,
+    range_min: 23.9,
+    range_max: 41.2
+  },
+  '#1' => {
+    color: 'red',
+    weight: 101,
+    strength: 12,
+    range_min: 30.2,
+    range_max: 52.1
+  },
+  '#2' => {
+    color: 'yellow',
+    weight: 126,
+    strength: 12,
+    range_min: 37.2,
+    range_max: 64.9
+  },
+  '#3' => {
+    color: 'blue',
+    weight: 167,
+    strength: 12,
+    range_min: 50.7,
+    range_max: 87.9
+  },
+  '#4' => {
+    color: 'grey',
+    weight: 225,
+    strength: 12,
+    range_min: 66,
+    range_max: 114.7
+  }
+}
+
+ultralights.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: ultralight.id }, attrs)
 end
 
-ultralights = [
-      {
-        name: '.4',
-        color: 'grey',
-        weight: 61,
-        strength: 8,
-        range_min: 15.5,
-        range_max: 26.7,
-      },
-      {
-        name: '.5',
-        color: 'purple',
-        weight: 74,
-        strength: 10,
-        range_min: 19.6,
-        range_max: 33.5,
-      },
-      {
-        name: '.75',
-        color: 'green',
-        weight: 89,
-        strength: 12,
-        range_min: 23.9,
-        range_max: 41.2,
-      },
-      {
-        name: '#1',
-        color: 'red',
-        weight: 101,
-        strength: 12,
-        range_min: 30.2,
-        range_max: 52.1,
-      },
-      {
-        name: '#2',
-        color: 'yellow',
-        weight: 126,
-        strength: 12,
-        range_min: 37.2,
-        range_max: 64.9,
-      },
-      {
-        name: '#3',
-        color: 'blue',
-        weight: 167,
-        strength: 12,
-        range_min: 50.7,
-        range_max: 87.9,
-      },
-      {
-        name: '#4',
-        color: 'grey',
-        weight: 225,
-        strength: 12,
-        range_min: 66,
-        range_max: 114.7,
-      }
-]
+z4 = seed(CamStyle, { name: 'Camalot Z4' }, manufacturer_id: black_diamond.id)
 
-ultralights.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = ultralight.id
-  end
-end
-
-z4 = CamStyle.find_or_create_by!(name: 'Camalot Z4') do |c|
-  c.manufacturer_id = black_diamond.id
-end
-
-z4s = [
-  {
-    name: '0',
+z4s = {
+  '0' => {
     color: 'green',
     weight: 43,
     strength: 5,
     range_min: 7.5,
     range_max: 11.8
   },
-  {
-    name: '.1',
+  '.1' => {
     color: 'red',
     weight: 45,
     strength: 5,
     range_min: 8.8,
     range_max: 13.8
   },
-  {
-    name: '.2',
+  '.2' => {
     color: 'yellow',
     weight: 48,
     strength: 6,
     range_min: 10.4,
     range_max: 16.3
   },
-  {
-    name: '.3',
+  '.3' => {
     color: 'blue',
     weight: 54,
     strength: 8,
     range_min: 12.4,
     range_max: 22.6
   },
-  {
-    name: '.4',
+  '.4' => {
     color: 'grey',
     weight: 61,
     strength: 9,
     range_min: 15.3,
     range_max: 27.7
   },
-  {
-    name: '.5',
+  '.5' => {
     color: 'purple',
     weight: 77,
     strength: 10,
     range_min: 18.8,
     range_max: 33.9
   },
-  {
-    name: '.75',
+  '.75' => {
     color: 'green',
     weight: 93,
     strength: 10,
     range_min: 23.1,
     range_max: 42.1
   }
-]
+}
 
-z4s.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = z4.id
-  end
+z4s.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: z4.id }, attrs)
 end
 
-c3 = CamStyle.find_or_create_by!(name: 'Camalot C3') do |c|
-  c.manufacturer_id = black_diamond.id
-end
+c3 = seed(CamStyle, { name: 'Camalot C3' }, manufacturer_id: black_diamond.id)
 
-c3s = [
-  {
-    name: '000',
+c3s = {
+  '000' => {
     weight: 55,
     strength: 4,
     range_min: 7.8,
     range_max: 12.9,
     color: 'grey'
   },
-  {
-    name: '00',
+  '00' => {
     weight: 57,
     strength: 6,
     range_min: 9,
     range_max: 13.7,
     color: 'purple'
   },
-  {
-    name: '0',
+  '0' => {
     range_min: 10.7,
     range_max: 15.8,
     weight: 59,
     strength: 7,
     color: 'green'
   },
-  {
-    name: '1',
+  '1' => {
     range_min: 12,
     range_max: 18.8,
     weight: 62,
     strength: 10,
     color: 'red'
   },
-  {
-    name: '2',
+  '2' => {
     range_min: 14.2,
     range_max: 22.6,
     weight: 66,
     strength: 10,
     color: 'yellow'
   }
-]
+}
 
-c3s.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = c3.id
-  end
+c3s.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: c3.id }, attrs)
 end
 
-x4 = CamStyle.find_or_create_by!(name: 'Camalot X4') do |c|
-  c.manufacturer_id = black_diamond.id
-end
+x4 = seed(CamStyle, { name: 'Camalot X4' }, manufacturer_id: black_diamond.id)
 
-x4s = [
-  {
-    name: '.1',
+x4s = {
+  '.1' => {
     weight: 51,
     strength: 5,
     range_min: 8.4,
     range_max: 13.8,
     color: 'red'
   },
-  {
-    name: '.2',
+  '.2' => {
     weight: 54,
     strength: 6,
     range_min: 9.9,
     range_max: 16.5,
     color: 'yellow'
   },
-  {
-    name: '.3',
+  '.3' => {
     range_min: 12.4,
     range_max: 21.2,
     weight: 75,
     strength: 8,
     color: 'blue'
   },
-  {
-    name: '.4',
+  '.4' => {
     range_min: 15.5,
     range_max: 26.6,
     weight: 82,
     strength: 9,
     color: 'grey'
   },
-  {
-    name: '.5',
+  '.5' => {
     range_min: 19.8,
     range_max: 33.7,
     weight: 91,
     strength: 9,
     color: 'purple'
   },
-  {
-    name: '.75',
+  '.75' => {
     range_min: 24,
     range_max: 41.2,
     weight: 112,
     strength: 9,
     color: 'green'
   }
-]
+}
 
-x4s.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = x4.id
-  end
+x4s.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: x4.id }, attrs)
 end
 
 totem = Manufacturer.find_or_create_by!(name: 'Totem')
 
-totem_cam = CamStyle.find_or_create_by!(name: 'Totem Cam') do |c|
-  c.manufacturer_id = totem.id
-end
+totem_cam = seed(CamStyle, { name: 'Totem Cam' }, manufacturer_id: totem.id)
 
-totems = [
-  {
-    name: '0.50',
+totems = {
+  '0.50' => {
     color: 'black',
     range_min: 11.7,
     range_max: 18.9,
     strength: 6,
     weight: 69
   },
-  {
-    name: '.65',
+  '.65' => {
     color: 'blue',
     range_min: 13.8,
     range_max: 22.5,
     strength: 8,
     weight: 75
   },
-  {
-    name: '0.80',
+  '0.80' => {
     color: 'yellow',
     range_min: 17,
     range_max: 27.7,
     strength: 9,
     weight: 83
   },
-  {
-    name: '1.00',
+  '1.00' => {
     color: 'purple',
     range_min: 20.9,
     range_max: 34.2,
     strength: 10,
     weight: 95
   },
-  {
-    name: '1.25',
+  '1.25' => {
     color: 'green',
     range_min: 25.7,
     range_max: 42.3,
     strength: 13,
     weight: 109
   },
-  {
-    name: '1.50',
+  '1.50' => {
     color: 'red',
     range_min: 31.6,
     range_max: 52.2,
     strength: 13,
     weight: 132
   },
-  {
-    name: '1.80',
+  '1.80' => {
     color: 'orange',
     range_min: 39.7,
     range_max: 64.2,
     strength: 13,
     weight: 144
   }
-]
+}
 
-totems.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = totem_cam.id
-  end
+totems.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: totem_cam.id }, attrs)
 end
 
 metolius = Manufacturer.find_or_create_by!(name: 'Metolius')
 
-mastercam = CamStyle.find_or_create_by!(name: 'Master Cam') do |c|
-  c.manufacturer_id = metolius.id
-end
+mastercam = seed(CamStyle, { name: 'Master Cam' }, manufacturer_id: metolius.id)
 
-mastercams = [
-  {
-    name: '00',
+mastercams = {
+  '00' => {
     color: 'grey',
     range_min: 8.5,
     range_max: 12,
     strength: 5,
     weight: 45
   },
-  {
-    name: '0',
+  '0' => {
     color: 'purple',
     range_min: 10,
     range_max: 15,
     strength: 5,
     weight: 45
   },
-  {
-    name: '#1',
+  '#1' => {
     color: 'blue',
     range_min: 12.5,
     range_max: 18,
     strength: 8,
     weight: 52
   },
-  {
-    name: '#2',
+  '#2' => {
     color: 'yellow',
     range_min: 15.5,
     range_max: 22.5,
     strength: 10,
     weight: 55
   },
-  {
-    name: '#3',
+  '#3' => {
     color: 'orange',
     range_min: 18.5,
     range_max: 26.5,
     strength: 10,
     weight: 65
   },
-  {
-    name: '#4',
+  '#4' => {
     color: 'red',
     range_min: 23.5,
     range_max: 33.5,
     strength: 10,
     weight: 75
   },
-  {
-    name: '#5',
+  '#5' => {
     color: 'black',
     range_min: 28,
     range_max: 39.5,
     strength: 10,
     weight: 85
   },
-  {
-    name: '#6',
+  '#6' => {
     color: 'green',
     range_min: 32.5,
     range_max: 48,
     strength: 10,
     weight: 96
   },
-  {
-    name: '#7',
+  '#7' => {
     color: 'blue',
     range_min: 40,
     range_max: 57.5,
     strength: 10,
     weight: 112
   },
-  {
-    name: '#8',
+  '#8' => {
     color: 'purple',
     range_min: 48.5,
     range_max: 71.5,
     strength: 10,
     weight: 129
   }
-]
+}
 
-mastercams.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = mastercam.id
-  end
+mastercams.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: mastercam.id }, attrs)
 end
 
 tcu = CamStyle.find_or_create_by!(name: 'TCU') do |c|
   c.manufacturer_id = metolius.id
 end
 
-tcus = [
-  {
-    name: '00',
+tcus = {
+  '00' => {
     color: 'grey',
     range_min: 8.5,
     range_max: 12,
     strength: 5,
     weight: 41
   },
-  {
-    name: '0',
+  '0' => {
     color: 'purple',
     range_min: 10,
     range_max: 15,
     strength: 5,
     weight: 43
   },
-  {
-    name: '#1',
+  '#1' => {
     color: 'blue',
     range_min: 12.5,
     range_max: 18,
     strength: 8,
     weight: 50
   },
-  {
-    name: '#2',
+  '#2' => {
     color: 'yellow',
     range_min: 15.5,
     range_max: 22.5,
     strength: 10,
     weight: 57
   },
-  {
-    name: '#3',
+  '#3' => {
     color: 'orange',
     range_min: 18.5,
     range_max: 26.5,
     strength: 10,
     weight: 59
   },
-  {
-    name: '#4',
+  '#4' => {
     color: 'red',
     range_min: 23.5,
     range_max: 33.5,
     strength: 10,
     weight: 68
   }
-]
+}
 
-tcus.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = tcu.id
-  end
+tcus.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: tcu.id }, attrs)
 end
 
 dmm = Manufacturer.find_or_create_by!(name: 'DMM')
 
-dragonfly = CamStyle.find_or_create_by!(name: 'Dragonfly') do |c|
-  c.manufacturer_id = dmm.id
-end
+dragonfly = seed(CamStyle, { name: 'Dragonfly' }, manufacturer_id: dmm.id)
 
-dragonflies = [
-      {
-        name: '#1',
-        color: 'green',
-        strength: 6,
-        weight: 55,
-        range_min: 7.8,
-        range_max: 11,
-      },
-      {
-        name: '#2',
-        color: 'red',
-        strength: 6,
-        weight: 56,
-        range_min: 8.7,
-        range_max: 12.9,
-      },
-      {
-        name: '#3',
-        color: 'gold',
-        strength: 8,
-        weight: 65,
-        range_min: 10.2,
-        range_max: 15.2,
-      },
-      {
-        name: '#4',
-        color: 'blue',
-        strength: 8,
-        weight: 67,
-        range_min: 12.1,
-        range_max: 17.9,
-      },
-      {
-        name: '#5',
-        color: 'silver',
-        strength: 9,
-        weight: 70,
-        range_min: 15.1,
-        range_max: 22.5,
-      },
-      {
-        name: '#6',
-        color: 'purple',
-        strength: 9,
-        weight: 73,
-        range_min: 19,
-        range_max: 28.3,
-      },
-]
+dragonflies = {
+  '#1' => {
+    color: 'green',
+    strength: 6,
+    weight: 55,
+    range_min: 7.8,
+    range_max: 11
+  },
+  '#2' => {
+    color: 'red',
+    strength: 6,
+    weight: 56,
+    range_min: 8.7,
+    range_max: 12.9
+  },
+  '#3' => {
+    color: 'gold',
+    strength: 8,
+    weight: 65,
+    range_min: 10.2,
+    range_max: 15.2
+  },
+  '#4' => {
+    color: 'blue',
+    strength: 8,
+    weight: 67,
+    range_min: 12.1,
+    range_max: 17.9
+  },
+  '#5' => {
+    color: 'silver',
+    strength: 9,
+    weight: 70,
+    range_min: 15.1,
+    range_max: 22.5
+  },
+  '#6' => {
+    color: 'purple',
+    strength: 9,
+    weight: 73,
+    range_min: 19,
+    range_max: 28.3
+  }
+}
 
-dragonflies.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = dragonfly.id
-  end
+dragonflies.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: dragonfly.id }, attrs)
 end
 
 fixe = Manufacturer.find_or_create_by!(name: 'Fixe')
 
-alien_lite = CamStyle.find_or_create_by!(name: 'Alien LITE') do |c|
-  c.manufacturer_id = fixe.id
-end
+alien_lite = seed(CamStyle, { name: 'Alien LITE' }, manufacturer_id: fixe.id)
 
-alien_lites = [
-      {
-        name: '1/3',
-        color: 'black',
-        strength: 5,
-        weight: 46,
-        range_min: 8,
-        range_max: 14,
-      },
-      {
-        name: '3/8',
-        color: 'blue',
-        strength: 6,
-        weight: 48,
-        range_min: 10,
-        range_max: 17,
-      },
-      {
-        name: '1/2',
-        color: 'green',
-        strength: 7,
-        weight: 52,
-        range_min: 13,
-        range_max: 22,
-      },
-      {
-        name: '3/4',
-        color: 'yellow',
-        strength: 10,
-        weight: 58,
-        range_min: 15,
-        range_max: 25,
-      },
-      {
-        name: '7/8',
-        color: 'grey',
-        strength: 10,
-        weight: 59,
-        range_min: 17,
-        range_max: 30,
-      },
-      {
-        name: '#1',
-        color: 'red',
-        strength: 10,
-        weight: 61,
-        range_min: 20,
-        range_max: 33,
-      },
-]
+alien_lites = {
+  '1/3' => {
+    color: 'black',
+    strength: 5,
+    weight: 46,
+    range_min: 8,
+    range_max: 14
+  },
+  '3/8' => {
+    color: 'blue',
+    strength: 6,
+    weight: 48,
+    range_min: 10,
+    range_max: 17
+  },
+  '1/2' => {
+    color: 'green',
+    strength: 7,
+    weight: 52,
+    range_min: 13,
+    range_max: 22
+  },
+  '3/4' => {
+    color: 'yellow',
+    strength: 10,
+    weight: 58,
+    range_min: 15,
+    range_max: 25
+  },
+  '7/8' => {
+    color: 'grey',
+    strength: 10,
+    weight: 59,
+    range_min: 17,
+    range_max: 30
+  },
+  '#1' => {
+    color: 'red',
+    strength: 10,
+    weight: 61,
+    range_min: 20,
+    range_max: 33
+  }
+}
 
-alien_lites.each do |attrs|
-  Cam.find_or_create_by!(attrs) do |c|
-    c.cam_style_id = alien_lite.id
-  end
+alien_lites.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: alien_lite.id }, attrs)
 end
