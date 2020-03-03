@@ -37,7 +37,7 @@ const Rack = () => {
               Please select cams from the lefthand menu.
             </div>
           )}
-          {selectedCams.map(({ name, camStyleId, id, color }) => (
+          {selectedCams.map(({ name, camStyleId, id, color, buyLink }) => (
             <List.Item key={id}>
               <div className="rack-cam">
                 <div
@@ -53,6 +53,11 @@ const Rack = () => {
                     {name} {camStyles[camStyleId].name}
                   </span>
                 </div>
+                {buyLink && (
+                  <div className="buy-link">
+                    <a href={buyLink} target="_blank"><Icon name="cart" /></a>
+                  </div>
+                )}
                 <div className="ticker">
                   <div className="number-with-square">{selectedCamIds[id]}</div>
                   <div className="plus-minus">

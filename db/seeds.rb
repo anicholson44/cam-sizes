@@ -18,7 +18,8 @@ c4s = {
     range_max: 23.4,
     weight: 69.8,
     strength: 8,
-    color: 'blue'
+    color: 'blue',
+    buy_link: 'https://amzn.to/2VFvLmo'
   },
   '.4' => {
     range_min: 15.5,

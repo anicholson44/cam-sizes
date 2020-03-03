@@ -38,6 +38,7 @@ export interface Cam extends Entity {
   readonly weight: number;
   readonly strength: number;
   readonly camStyleId: number;
+  readonly buyLink?: string;
 }
 
 export interface EntitiesState {
