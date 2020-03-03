@@ -19,70 +19,79 @@ c4s = {
     weight: 69.8,
     strength: 8,
     color: 'blue',
-    buy_link: 'https://amzn.to/2VFvLmo'
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '.4' => {
     range_min: 15.5,
     range_max: 26.7,
     weight: 77.5,
     strength: 9,
-    color: 'grey'
+    color: 'grey',
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '.5' => {
     range_min: 19.6,
     range_max: 33.5,
     weight: 93,
     strength: 12,
-    color: 'purple'
+    color: 'purple',
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '.75' => {
     range_min: 23.9,
     range_max: 41.2,
     weight: 107.5,
     strength: 12,
-    color: 'green'
+    color: 'green',
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '#1' => {
     range_min: 30.2,
     range_max: 52.1,
     weight: 123.9,
     strength: 12,
-    color: 'red'
+    color: 'red',
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '#2' => {
     range_min: 37.2,
     range_max: 64.9,
     weight: 140.3,
     strength: 12,
-    color: 'yellow'
+    color: 'yellow',
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '#3' => {
     range_min: 50.7,
     range_max: 87.9,
     weight: 181.1,
     strength: 12,
-    color: 'blue'
+    color: 'blue',
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '#4' => {
     weight: 257.8,
     range_min: 66.0,
     range_max: 114.7,
     strength: 14,
-    color: 'grey'
+    color: 'grey',
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '#5' => {
     weight: 348.1,
     range_min: 85.4,
     range_max: 148.5,
     strength: 14,
-    color: 'purple'
+    color: 'purple',
+    buy_link: 'https://amzn.to/3cmq030'
   },
   '#6' => {
     weight: 529.9,
     range_min: 114.1,
     range_max: 195.0,
     strength: 14,
-    color: 'green'
+    color: 'green',
+    buy_link: 'https://amzn.to/3cmq030'
   }
 }
 
