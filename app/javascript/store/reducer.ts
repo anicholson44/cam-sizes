@@ -21,7 +21,19 @@ const reducer = (
   switch (action.type) {
     case getType(actions.fetchCamsAsync.success): {
       const { payload: entities } = action;
-      return { ...state, entities };
+      let { selectedCams } = state;
+      if (Object.keys(selectedCams).length === 0) {
+        selectedCams = Object.keys(entities.cams).reduce((o, id) => {
+          if (
+            entities.cams[Number(id)].camStyleId ===
+            Number(Object.keys(entities.camStyles)[0])
+          ) {
+            o[Number(id)] = 1;
+          }
+          return o;
+        }, {});
+      }
+      return { ...state, entities, selectedCams };
     }
     case getType(actions.selectCamStyle): {
       const { cams } = state.entities.camStyles[action.payload];
