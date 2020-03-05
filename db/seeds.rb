@@ -606,6 +606,71 @@ dragonflies.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: dragonfly.id }, attrs)
 end
 
+dragon = seed(CamStyle, { name: 'Dragon '}, manufacturer_id: dmm.id)
+
+dragons = {
+  '00' => {
+    color: 'blue',
+    strength: 10,
+    weight: 75,
+    range_min: 14,
+    range_max: 21,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+  '0' => {
+    color: 'silver',
+    strength: 14,
+    weight: 85,
+    range_min: 16,
+    range_max: 25,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+  '#1' => {
+    color: 'purple',
+    strength: 14,
+    weight: 103,
+    range_min: 20,
+    range_max: 33,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+  '#2' => {
+    color: 'green',
+    strength: 14,
+    weight: 117,
+    range_min: 24,
+    range_max: 41,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+  '#3' => {
+    color: 'red',
+    strength: 14,
+    weight: 128,
+    range_min: 29,
+    range_max: 50,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+  '#4' => {
+    color: 'gold',
+    strength: 14,
+    weight: 154,
+    range_min: 38,
+    range_max: 64,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+  '#5' => {
+    color: 'blue',
+    strength: 14,
+    weight: 208,
+    range_min: 50,
+    range_max: 85,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+}
+
+dragons.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: dragon.id }, attrs)
+end
+
 fixe = Manufacturer.find_or_create_by!(name: 'Fixe')
 
 alien_lite = seed(CamStyle, { name: 'Alien LITE' }, manufacturer_id: fixe.id)
