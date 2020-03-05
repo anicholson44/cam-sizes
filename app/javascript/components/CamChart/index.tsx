@@ -50,15 +50,6 @@ const xTicks = Array.from({ length: numXTicks }, (_, i) => (
 
 const CamChart = () => {
   const cams = useSelector(selectors.getCams);
-  const selectedCams = Object.keys(useSelector(selectors.getSelectedCams)).map(
-    id => cams[Number(id)]
-  );
-  selectedCams.sort((first, second) => {
-    return (
-      (first.rangeMax + first.rangeMin) / 2 -
-      (second.rangeMax + second.rangeMin) / 2
-    );
-  });
   const camStyles = useSelector<RootState, EntityMap<CamStyle>>(
     ({ entities }) => entities.camStyles
   );
@@ -71,61 +62,71 @@ const CamChart = () => {
   const dispatch = useDispatch();
 
   let camRangeHighlight = null;
-  let y = 0;
-  const camRects = selectedCams.map(
-    ({ id, color, rangeMin, rangeMax, name, camStyleId, strength }, i) => {
-      const highlightRange = highlightedCamRange === id;
-      const x = millimetersToPixels * rangeMin;
-      const rectWidth = millimetersToPixels * (rangeMax - rangeMin);
-      if (highlightRange) {
-        camRangeHighlight = (
-          <>
-            <line
-              x1={x}
-              x2={x}
-              y1={paddingY * -1}
-              y2="100%"
-              opacity="25%"
-              stroke="black"
-            />
-            <line
-              x1={x + rectWidth}
-              x2={x + rectWidth}
-              y1={paddingY * -1}
-              y2="100%"
-              opacity="25%"
-              stroke="black"
-            />
-          </>
+  const camRects = useSelector<RootState>(state => {
+    const selectedCams = Object.keys(selectors.getSelectedCams(state))
+      .map(id => cams[Number(id)])
+      .sort((first, second) => {
+        return (
+          (first.rangeMax + first.rangeMin) / 2 -
+          (second.rangeMax + second.rangeMin) / 2
+        );
+      });
+    let y = 0;
+    return selectedCams.map(
+      ({ id, color, rangeMin, rangeMax, name, camStyleId, strength }, i) => {
+        const highlightRange = highlightedCamRange === id;
+        const x = millimetersToPixels * rangeMin;
+        const rectWidth = millimetersToPixels * (rangeMax - rangeMin);
+        if (highlightRange) {
+          camRangeHighlight = (
+            <>
+              <line
+                x1={x}
+                x2={x}
+                y1={paddingY * -1}
+                y2="100%"
+                opacity="25%"
+                stroke="black"
+              />
+              <line
+                x1={x + rectWidth}
+                x2={x + rectWidth}
+                y1={paddingY * -1}
+                y2="100%"
+                opacity="25%"
+                stroke="black"
+              />
+            </>
+          );
+        }
+        const thisY = y;
+        const height = strength * kilonewtonsToPixels;
+        y += height + 1;
+        return (
+          <CamRect
+            key={i}
+            color={color}
+            stroke="black"
+            x={x}
+            y={thisY}
+            width={rectWidth}
+            height={height}
+            label={`${camStyles[camStyleId].name} ${name}`}
+            onHover={() => dispatch(actions.highlightCamRange(id))}
+            onMouseLeave={() => dispatch(actions.unhighlightCamRange())}
+            blurred={
+              Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
+            }
+            highlightRange={highlightRange}
+            rangeMin={rangeMin}
+            rangeMax={rangeMax}
+            strength={strength}
+            showStrength={!highlightedCamRange}
+          />
         );
       }
-      const thisY = y;
-      const height = strength * kilonewtonsToPixels;
-      y += height + 1;
-      return (
-        <CamRect
-          key={i}
-          color={color}
-          stroke="black"
-          x={x}
-          y={thisY}
-          width={rectWidth}
-          height={height}
-          label={`${camStyles[camStyleId].name} ${name}`}
-          onHover={() => dispatch(actions.highlightCamRange(id))}
-          onMouseLeave={() => dispatch(actions.unhighlightCamRange())}
-          blurred={
-            Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
-          }
-          highlightRange={highlightRange}
-          rangeMin={rangeMin}
-          rangeMax={rangeMax}
-          strength={strength}
-          showStrength={!highlightedCamRange}
-        />
-      );
-    }
-  );
+    );
+  });
 
   return (
     <svg viewBox={`-${paddingX} -${paddingY} ${width} ${height}`}>
