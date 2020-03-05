@@ -53,12 +53,14 @@ const Rack = () => {
                     {name} {camStyles[camStyleId].name}
                   </span>
                 </div>
-                {buyLink && (
-                  <div className="buy-link">
-                    <a href={buyLink} target="_blank"><Icon name="cart" /></a>
-                  </div>
-                )}
                 <div className="ticker">
+                  {buyLink && (
+                    <div className="buy-link">
+                      <a href={buyLink} target="_blank">
+                        <Icon name="cart" />
+                      </a>
+                    </div>
+                  )}
                   <div className="number-with-square">{selectedCamIds[id]}</div>
                   <div className="plus-minus">
                     <Icon
