@@ -658,3 +658,70 @@ alien_lites = {
 alien_lites.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: alien_lite.id }, attrs)
 end
+
+wild_country = Manufacturer.find_or_create_by!(name: 'Wild Country')
+
+friend = seed(CamStyle, { name: 'Friend' }, manufacturer_id: wild_country.id)
+
+friends = {
+  '.4' => {
+    color: 'silver',
+    strength: 10,
+    weight: 75,
+    range_min: 15.8,
+    range_max: 26.37,
+    buy_link: 'https://amzn.to/2TqzYsD'
+  },
+  '.5' => {
+    color: 'purple',
+    strength: 12,
+    weight: 88,
+    range_min: 20.6,
+    range_max: 34.5,
+    buy_link: 'https://amzn.to/2TqzYsD'
+  },
+  '.75' => {
+    color: 'green',
+    strength: 12,
+    weight: 102,
+    range_min: 25.8,
+    range_max: 43,
+    buy_link: 'https://amzn.to/2TqzYsD'
+  },
+  '#1' => {
+    color: 'red',
+    strength: 12,
+    weight: 123,
+    range_min: 31.7,
+    range_max: 53.6,
+    buy_link: 'https://amzn.to/2TqzYsD'
+  },
+  '#2' => {
+    color: 'gold',
+    strength: 12,
+    weight: 142,
+    range_min: 41.5,
+    range_max: 69.3,
+    buy_link: 'https://amzn.to/2TqzYsD'
+  },
+  '#3' => {
+    color: 'blue',
+    strength: 12,
+    weight: 192,
+    range_min: 52.7,
+    range_max: 88,
+    buy_link: 'https://amzn.to/2TqzYsD'
+  },
+  '#4' => {
+    color: 'silver',
+    strength: 12,
+    weight: 260,
+    range_min: 66.8,
+    range_max: 112.1,
+    buy_link: 'https://amzn.to/2TqzYsD'
+  }
+}
+
+friends.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: friend.id }, attrs)
+end
