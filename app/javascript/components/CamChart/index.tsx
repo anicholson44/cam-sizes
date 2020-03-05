@@ -74,10 +74,9 @@ const CamChart = () => {
     let y = 0;
     return selectedCams.map(
       ({ id, color, rangeMin, rangeMax, name, camStyleId, strength }, i) => {
-        const highlightRange = highlightedCamRange === id;
         const x = millimetersToPixels * rangeMin;
         const rectWidth = millimetersToPixels * (rangeMax - rangeMin);
-        if (highlightRange) {
+        if (highlightedCamRange === id) {
           camRangeHighlight = (
             <>
               <line
@@ -117,7 +116,7 @@ const CamChart = () => {
             blurred={
               Object.keys(highlightedCams).length > 0 && !highlightedCams[id]
             }
-            highlightRange={highlightRange}
+            highlightRange={!!highlightedCamRange}
             rangeMin={rangeMin}
             rangeMax={rangeMax}
             strength={strength}
