@@ -14,7 +14,7 @@ import CamRect from "./CamRect";
 const height = 2000;
 const width = 1200;
 const paddingX = 0;
-const paddingY = 20;
+const paddingY = 50;
 
 // suffix numbers to distinguish numbers that are in pixels from numbers in millimeters
 const maxX_mm = 220;
@@ -132,6 +132,9 @@ const CamChart = () => {
     <svg viewBox={`-${paddingX} -${paddingY} ${width} ${height}`}>
       <line x1={0} y1={0} x2={0} y2="100%" stroke="black" />
       <line x1={0} y1={0} y2={0} x2="100%" stroke="black" />
+      <text x={width / 2 - 50} y={paddingY * -1 / 2} style={{ fontSize: 20, opacity: 0.8 }}>
+        Camming Range
+      </text>
       {xTicks}
       <g transform="translate(0 20)">
         {camRects}
