@@ -790,3 +790,78 @@ friends = {
 friends.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: friend.id }, attrs)
 end
+
+kouba = Manufacturer.find_or_create_by!(name: 'Kouba')
+
+friend_flex = seed(CamStyle, { name: 'Friend Flex' }, manufacturer_id: kouba.id)
+
+friend_flexes = {
+  '.25' => {
+    color: 'green',
+    strength: 7,
+    weight: 60,
+    range_min: 12,
+    range_max: 16.5,
+    buy_link: 'https://www.koubaclimbing.com/index.php/friend-flex'
+  },
+  '.5' => {
+    color: 'blue',
+    strength: 9,
+    weight: 65,
+    range_min: 14,
+    range_max: 20,
+    buy_link: 'https://www.koubaclimbing.com/index.php/friend-flex'
+  },
+  '.75' => {
+    color: 'red',
+    strength: 10,
+    weight: 68,
+    range_min: 17,
+    range_max: 24.5,
+    buy_link: 'https://www.koubaclimbing.com/index.php/friend-flex'
+  },
+  '#1' => {
+    color: 'grey',
+    strength: 12,
+    weight: 96,
+    range_min: 20,
+    range_max: 29,
+    buy_link: 'https://www.koubaclimbing.com/index.php/friend-flex'
+  },
+  '#2' => {
+    color: 'gold',
+    strength: 12,
+    weight: 112,
+    range_min: 27,
+    range_max: 41,
+    buy_link: 'https://www.koubaclimbing.com/index.php/friend-flex'
+  },
+  '#3' => {
+    color: 'blue',
+    strength: 12,
+    weight: 148,
+    range_min: 35,
+    range_max: 53,
+    buy_link: 'https://www.koubaclimbing.com/index.php/friend-flex'
+  },
+  '#4' => {
+    color: 'orange',
+    strength: 12,
+    weight: 175,
+    range_min: 48,
+    range_max: 67,
+    buy_link: 'https://www.koubaclimbing.com/index.php/friend-flex'
+  },
+  '#5' => {
+    color: 'black',
+    strength: 12,
+    weight: 219,
+    range_min: 61,
+    range_max: 91,
+    buy_link: 'https://www.koubaclimbing.com/index.php/friend-flex'
+  },
+}
+
+friend_flexes.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: friend_flex.id }, attrs)
+end
