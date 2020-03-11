@@ -132,7 +132,7 @@ const CamChart = () => {
       <line x1={0} y1={0} x2={0} y2="100%" stroke="black" />
       <line x1={0} y1={0} y2={0} x2="100%" stroke="black" />
       <text x={width / 2 - 50} y={paddingY * -1 / 2} style={{ fontSize: 20, opacity: 0.8 }}>
-        Camming Range
+        Expansion Range
       </text>
       {xTicks}
       <g transform="translate(0 20)">
