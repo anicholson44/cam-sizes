@@ -10,7 +10,7 @@
 
 black_diamond = Manufacturer.find_or_create_by!(name: 'Black Diamond')
 
-c4 = seed(CamStyle, { name: 'Camalot C4' }, manufacturer_id: black_diamond.id)
+c4 = seed(CamStyle, { name: 'Camalot C4' }, { manufacturer_id: black_diamond.id, lobes: 4 })
 
 c4s = {
   '.3' => {
@@ -99,7 +99,7 @@ c4s.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: c4.id }, attrs)
 end
 
-ultralight = seed(CamStyle, { name: 'C4 Ultralight' }, manufacturer_id: black_diamond.id)
+ultralight = seed(CamStyle, { name: 'C4 Ultralight' }, { manufacturer_id: black_diamond.id, lobes: 4 })
 
 ultralights = {
   '.4' => {
@@ -164,7 +164,7 @@ ultralights.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: ultralight.id }, attrs)
 end
 
-z4 = seed(CamStyle, { name: 'Camalot Z4' }, manufacturer_id: black_diamond.id)
+z4 = seed(CamStyle, { name: 'Camalot Z4' }, { manufacturer_id: black_diamond.id, lobes: 4 })
 
 z4s = {
   '0' => {
@@ -229,7 +229,7 @@ z4s.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: z4.id }, attrs)
 end
 
-c3 = seed(CamStyle, { name: 'Camalot C3' }, manufacturer_id: black_diamond.id)
+c3 = seed(CamStyle, { name: 'Camalot C3' }, { manufacturer_id: black_diamond.id, lobes: 3 })
 
 c3s = {
   '000' => {
@@ -273,7 +273,7 @@ c3s.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: c3.id }, attrs)
 end
 
-x4 = seed(CamStyle, { name: 'Camalot X4' }, manufacturer_id: black_diamond.id)
+x4 = seed(CamStyle, { name: 'Camalot X4' }, { manufacturer_id: black_diamond.id, lobes: 4 })
 
 x4s = {
   '.1' => {
@@ -332,7 +332,7 @@ end
 
 totem = Manufacturer.find_or_create_by!(name: 'Totem')
 
-totem_cam = seed(CamStyle, { name: 'Totem Cam' }, manufacturer_id: totem.id)
+totem_cam = seed(CamStyle, { name: 'Totem Cam' }, { manufacturer_id: totem.id, lobes: 4 })
 
 totems = {
   '0.50' => {
@@ -399,7 +399,7 @@ end
 
 metolius = Manufacturer.find_or_create_by!(name: 'Metolius')
 
-mastercam = seed(CamStyle, { name: 'Master Cam' }, manufacturer_id: metolius.id)
+mastercam = seed(CamStyle, { name: 'Master Cam' }, { manufacturer_id: metolius.id, lobes: 4 })
 
 mastercams = {
   '00' => {
@@ -488,9 +488,7 @@ mastercams.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: mastercam.id }, attrs)
 end
 
-tcu = CamStyle.find_or_create_by!(name: 'TCU') do |c|
-  c.manufacturer_id = metolius.id
-end
+tcu = seed(CamStyle, { name: 'TCU' }, { manufacturer_id: metolius.id, lobes: 3 })
 
 tcus = {
   '00' => {
@@ -549,7 +547,7 @@ end
 
 dmm = Manufacturer.find_or_create_by!(name: 'DMM')
 
-dragonfly = seed(CamStyle, { name: 'Dragonfly' }, manufacturer_id: dmm.id)
+dragonfly = seed(CamStyle, { name: 'Dragonfly' }, { manufacturer_id: dmm.id, lobes: 4 })
 
 dragonflies = {
   '#1' => {
@@ -606,7 +604,7 @@ dragonflies.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: dragonfly.id }, attrs)
 end
 
-dragon = seed(CamStyle, { name: 'Dragon '}, manufacturer_id: dmm.id)
+dragon = seed(CamStyle, { name: 'Dragon '}, { manufacturer_id: dmm.id, lobes: 4 })
 
 dragons = {
   '00' => {
@@ -673,7 +671,7 @@ end
 
 fixe = Manufacturer.find_or_create_by!(name: 'Fixe')
 
-alien_lite = seed(CamStyle, { name: 'Alien LITE' }, manufacturer_id: fixe.id)
+alien_lite = seed(CamStyle, { name: 'Alien LITE' }, { manufacturer_id: fixe.id, lobes: 4 })
 
 alien_lites = {
   '1/3' => {
@@ -726,7 +724,7 @@ end
 
 wild_country = Manufacturer.find_or_create_by!(name: 'Wild Country')
 
-friend = seed(CamStyle, { name: 'Friend' }, manufacturer_id: wild_country.id)
+friend = seed(CamStyle, { name: 'Friend' }, { manufacturer_id: wild_country.id, lobes: 4 })
 
 friends = {
   '.4' => {
@@ -793,7 +791,7 @@ end
 
 kouba = Manufacturer.find_or_create_by!(name: 'Kouba')
 
-friend_flex = seed(CamStyle, { name: 'Friend Flex' }, manufacturer_id: kouba.id)
+friend_flex = seed(CamStyle, { name: 'Friend Flex' }, { manufacturer_id: kouba.id, lobes: 4 })
 
 friend_flexes = {
   '.25' => {
