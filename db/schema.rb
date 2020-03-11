@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_11_194058) do
+ActiveRecord::Schema.define(version: 2020_03_11_200755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_03_11_194058) do
   create_table "cam_styles", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "manufacturer_id", null: false
-    t.integer "lobes"
+    t.integer "lobes", null: false
     t.index ["manufacturer_id"], name: "index_cam_styles_on_manufacturer_id"
   end
 
