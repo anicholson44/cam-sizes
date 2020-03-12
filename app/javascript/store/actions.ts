@@ -22,6 +22,9 @@ const unhighlightCams = createAction("UNHIGHLIGHT_CAMS")<void>();
 const highlightCamRange = createAction("HIGHLIGHT_CAM_RANGE")<number>();
 const unhighlightCamRange = createAction("UNHIGHLIGHT_CAM_RANGE")<void>();
 
+const showDetailForCam = createAction("SHOW_DETAIL_FOR_CAM")<number>();
+const hideCamDetail = createAction("HIDE_CAM_DETAIL")<void>();
+
 export default {
   fetchCamsAsync,
   selectCamStyle,
@@ -33,5 +36,7 @@ export default {
   highlightCam,
   unhighlightCams,
   highlightCamRange,
-  unhighlightCamRange
+  unhighlightCamRange,
+  showDetailForCam,
+  hideCamDetail
 };

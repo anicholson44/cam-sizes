@@ -9,6 +9,7 @@ const widthOfLabel = (label: string) => {
 const rangeLabelStyle = { fontSize: 10, opacity: "50%" };
 
 const CamRect = ({
+  onClick,
   color,
   stroke,
   x,
@@ -19,12 +20,13 @@ const CamRect = ({
   blurred,
   onHover,
   onMouseLeave,
-  highlightRange,
+  showRange,
   rangeMin,
   rangeMax,
   strength,
   showStrength
 }: {
+  onClick: () => unknown;
   color: string;
   stroke: string;
   x: number;
@@ -35,20 +37,21 @@ const CamRect = ({
   blurred: boolean;
   onHover: () => unknown;
   onMouseLeave: () => unknown;
-  highlightRange?: boolean;
+  showRange?: boolean;
   rangeMin: number;
   rangeMax: number;
   strength: number;
   showStrength: boolean;
 }) => {
   const textY = y + height / 2 + 4;
-  const labelOffset = 5 + (highlightRange ? widthOfLabel(rangeMax + "mm") : 0);
+  const labelOffset = 5 + (showRange ? widthOfLabel(rangeMax + "mm") : 0);
 
   return (
     <g
       style={{ cursor: "pointer" }}
       onMouseEnter={onHover}
       onMouseLeave={onMouseLeave}
+      onClick={onClick}
     >
       <rect
         fill={color}
@@ -62,7 +65,7 @@ const CamRect = ({
       <text x={x + width + labelOffset} y={textY} style={{ fontSize: 10 }}>
         {label}
       </text>
-      {highlightRange ? (
+      {showRange ? (
         <>
           <text
             x={x - widthOfLabel(rangeMin + "mm")}

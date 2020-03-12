@@ -11,7 +11,8 @@ const defaultState: RootState = {
   },
   selectedCams: {},
   highlightedCams: {},
-  highlightedCamRange: undefined
+  highlightedCamRange: undefined,
+  showDetailForCam: undefined
 };
 
 const reducer = (
@@ -52,10 +53,17 @@ const reducer = (
       const { cams } = state.entities.camStyles[action.payload];
       const selectedCams = {};
       Object.assign(selectedCams, state.selectedCams);
-      cams.forEach(id => delete selectedCams[id]);
+      let showDetailForCam = state.showDetailForCam;
+      cams.forEach(id => {
+        delete selectedCams[id];
+        if (showDetailForCam === id) {
+          showDetailForCam = defaultState.showDetailForCam;
+        }
+      });
       return {
         ...state,
-        selectedCams
+        selectedCams,
+        showDetailForCam
       };
     }
     case getType(actions.selectCam): {
@@ -70,20 +78,26 @@ const reducer = (
     case getType(actions.deselectCam): {
       const selectedCams = {};
       Object.assign(selectedCams, state.selectedCams);
+      let showDetailForCam = state.showDetailForCam;
       if (selectedCams[action.payload] > 1) {
         selectedCams[action.payload] -= 1;
       } else {
         delete selectedCams[action.payload];
+        if (action.payload === showDetailForCam) {
+          showDetailForCam = defaultState.showDetailForCam;
+        }
       }
       return {
         ...state,
-        selectedCams
+        selectedCams,
+        showDetailForCam
       };
     }
     case getType(actions.deselectAllCams): {
       return {
         ...state,
-        selectedCams: defaultState.selectedCams
+        selectedCams: defaultState.selectedCams,
+        showDetailForCam: defaultState.showDetailForCam
       };
     }
     case getType(actions.highlightCamStyle): {
@@ -128,6 +142,18 @@ const reducer = (
       return {
         ...state,
         highlightedCamRange: undefined
+      };
+    }
+    case getType(actions.showDetailForCam): {
+      return {
+        ...state,
+        showDetailForCam: action.payload
+      };
+    }
+    case getType(actions.hideCamDetail): {
+      return {
+        ...state,
+        showDetailForCam: defaultState.showDetailForCam
       };
     }
     default: {

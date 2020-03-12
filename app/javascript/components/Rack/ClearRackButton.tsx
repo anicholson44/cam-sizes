@@ -6,7 +6,7 @@ const ClearRackButton = () => {
   const dispatch = useDispatch();
   return (
     <div
-      className="clear-rack-button"
+      className="button"
       onClick={() => dispatch(actions.deselectAllCams())}
     >
       Clear

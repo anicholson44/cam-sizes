@@ -27,7 +27,9 @@ export interface Manufacturer extends Entity {
 
 export interface CamStyle extends Entity {
   readonly name: string;
+  readonly manufacturerId: number;
   readonly cams: ReadonlyArray<number>;
+  readonly lobes: number;
 }
 
 export interface Cam extends Entity {
@@ -52,6 +54,7 @@ export interface RootState {
   readonly selectedCams: IdStore<number>;
   readonly highlightedCams: IdStore<true>;
   readonly highlightedCamRange: void | number;
+  readonly showDetailForCam: void | number;
 }
 
 export type RootEpic = Epic<
