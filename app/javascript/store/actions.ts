@@ -25,6 +25,8 @@ const unhighlightCamRange = createAction("UNHIGHLIGHT_CAM_RANGE")<void>();
 const showDetailForCam = createAction("SHOW_DETAIL_FOR_CAM")<number>();
 const hideCamDetail = createAction("HIDE_CAM_DETAIL")<void>();
 
+const setShowDuplicatesInChart = createAction("SET_SHOW_DUPLICATES_IN_CHART")<boolean>();
+
 export default {
   fetchCamsAsync,
   selectCamStyle,
@@ -38,5 +40,6 @@ export default {
   highlightCamRange,
   unhighlightCamRange,
   showDetailForCam,
-  hideCamDetail
+  hideCamDetail,
+  setShowDuplicatesInChart
 };

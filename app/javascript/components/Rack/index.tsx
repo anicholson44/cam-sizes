@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Header, Segment, List, Icon, Button } from "semantic-ui-react";
-import { selectors, actions } from "../../store";
+import { Header, Segment, List, Icon, Checkbox } from "semantic-ui-react";
+import { selectors, actions, RootState } from "../../store";
 import ClearRackButton from "./ClearRackButton";
 
 const Rack = () => {
@@ -12,6 +12,9 @@ const Rack = () => {
     .reduce((w, cam) => w + cam.weight * selectedCamIds[cam.id], 0)
     .toFixed(1);
   const camStyles = useSelector(selectors.getCamStyles);
+  const showDuplicatesInChart = useSelector<RootState, boolean>(
+    ({ showDuplicatesInChart }) => showDuplicatesInChart
+  );
   const dispatch = useDispatch();
 
   return (
@@ -26,9 +29,22 @@ const Rack = () => {
             {weight}g
           </List.Item>
           {selectedCams.length !== 0 && (
-            <List.Item>
-              <ClearRackButton />
-            </List.Item>
+            <>
+              <List.Item>
+                <ClearRackButton />
+              </List.Item>
+              <List.Item>
+                <Checkbox
+                  label="Show multiples in chart"
+                  checked={showDuplicatesInChart}
+                  onClick={() =>
+                    dispatch(
+                      actions.setShowDuplicatesInChart(!showDuplicatesInChart)
+                    )
+                  }
+                ></Checkbox>
+              </List.Item>
+            </>
           )}
         </List>
         <List>

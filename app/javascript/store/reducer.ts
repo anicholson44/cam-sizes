@@ -12,7 +12,8 @@ const defaultState: RootState = {
   selectedCams: {},
   highlightedCams: {},
   highlightedCamRange: undefined,
-  showDetailForCam: undefined
+  showDetailForCam: undefined,
+  showDuplicatesInChart: true
 };
 
 const reducer = (
@@ -154,6 +155,12 @@ const reducer = (
       return {
         ...state,
         showDetailForCam: defaultState.showDetailForCam
+      };
+    }
+    case getType(actions.setShowDuplicatesInChart): {
+      return {
+        ...state,
+        showDuplicatesInChart: action.payload
       };
     }
     default: {

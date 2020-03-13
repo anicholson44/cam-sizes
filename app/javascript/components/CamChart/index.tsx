@@ -51,14 +51,26 @@ const CamChart = () => {
   const highlightedCams = useSelector(selectors.getHighlightedCams);
   const highlightedCamRange = useSelector(selectors.getHighlightedCamRange);
   const showDetailForCam = useSelector(selectors.getShowDetailForCam);
+  const showDuplicatesInChart = useSelector<RootState, boolean>(
+    ({ showDuplicatesInChart }) => showDuplicatesInChart
+  );
 
   const dispatch = useDispatch();
 
   let camRangeHighlight = null;
   let camDetail = null;
   const camRects = useSelector<RootState>(state => {
-    const selectedCams = Object.keys(selectors.getSelectedCams(state))
-      .map(id => cams[Number(id)])
+    const selectedCams = selectors.getSelectedCams(state);
+    const camsToShow = Object.keys(selectedCams)
+      .reduce((arr, id) => {
+        for (let i = 0; i < selectedCams[id]; i++) {
+          arr.push(cams[Number(id)]);
+          if (!showDuplicatesInChart) {
+            break;
+          }
+        }
+        return arr;
+      }, [])
       .sort((first, second) => {
         return (
           (first.rangeMax + first.rangeMin) / 2 -
@@ -66,7 +78,7 @@ const CamChart = () => {
         );
       });
     let y = 0;
-    return selectedCams.map((cam, i) => {
+    return camsToShow.map((cam, i) => {
       const { id, color, rangeMin, rangeMax, name, camStyleId, strength } = cam;
       const x = millimetersToPixels * rangeMin;
       const rectWidth = millimetersToPixels * (rangeMax - rangeMin);

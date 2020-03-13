@@ -55,6 +55,7 @@ export interface RootState {
   readonly highlightedCams: IdStore<true>;
   readonly highlightedCamRange: void | number;
   readonly showDetailForCam: void | number;
+  readonly showDuplicatesInChart: boolean;
 }
 
 export type RootEpic = Epic<
