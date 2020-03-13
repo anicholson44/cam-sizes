@@ -6,10 +6,10 @@ import XAxisTick from "./XAxisTick";
 import CamRect from "./CamRect";
 import CamDetail from "./CamDetail";
 
-const height = 2000;
+const height = 5000;
 const width = 1200;
 const paddingX = 0;
-const paddingY = 50;
+const paddingY = 80;
 
 // suffix numbers to distinguish numbers that are in pixels from numbers in millimeters
 const maxX_mm = 220;
@@ -20,7 +20,7 @@ const tickDistance_mm = 10;
 const numXTicks = maxX_mm / tickDistance_mm;
 const tickDistance_pixels = millimetersToPixels * tickDistance_mm;
 
-const maxY_kn = 750;
+const maxY_kn = 1875;
 const kilonewtonsToPixels = height / maxY_kn;
 const shadowId = "shadow";
 
