@@ -82,7 +82,7 @@ const CamDetail = ({
             y={innerPadding + fieldPadding}
           />
           <DetailField
-            label="Name"
+            label="Size"
             value={cam.name}
             x={innerPadding}
             y={innerPadding + 2 * fieldPadding}
