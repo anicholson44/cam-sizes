@@ -662,6 +662,30 @@ dragons = {
     range_min: 50,
     range_max: 85,
     buy_link: 'https://amzn.to/3aux0co'
+  },
+  '#6' => {
+    color: 'silver',
+    strength: 14,
+    weight: 276,
+    range_min: 68,
+    range_max: 114,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+  '#7' => {
+    color: 'purple',
+    strength: 14,
+    weight: 362,
+    range_min: 88,
+    range_max: 149,
+    buy_link: 'https://amzn.to/3aux0co'
+  },
+  '#8' => {
+    color: 'green',
+    strength: 14,
+    weight: 515,
+    range_min: 116,
+    range_max: 195,
+    buy_link: 'https://amzn.to/3aux0co'
   }
 }
 
