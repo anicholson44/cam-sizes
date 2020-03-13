@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Accordion, Menu } from "semantic-ui-react";
-import { RootState, CamStyle, EntityMap, Cam, IdStore, actions } from "../../store";
+import {
+  RootState,
+  CamStyle,
+  EntityMap,
+  Cam,
+  IdStore,
+  actions,
+  selectors
+} from "../../store";
 import CamStyleCheckbox from "./CamStyleCheckbox";
 import CamMenuItem from "./CamMenuItem";
 
@@ -9,9 +17,7 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
   const camStyles = useSelector<RootState, CamStyle[]>(({ entities }) =>
     entities.manufacturers[id].camStyles.map(id => entities.camStyles[id])
   );
-  const cams = useSelector<RootState, EntityMap<Cam>>(
-    ({ entities }) => entities.cams
-  );
+  const cams = useSelector(selectors.getCams);
   const [activeAccordions, setActiveAccordions] = useState<IdStore<true>>({});
   const dispatch = useDispatch();
 
@@ -34,19 +40,23 @@ const ManufacturerMenuItem = ({ id }: { id: number }) => {
                 }
                 setActiveAccordions(newActiveAccordions);
               }}
-              onMouseEnter={() => dispatch(actions.highlightCamStyle(camStyle.id))}
+              onMouseEnter={() =>
+                dispatch(actions.highlightCamStyle(camStyle.id))
+              }
               onMouseLeave={() => dispatch(actions.unhighlightCams())}
             />
             <Accordion.Content
               active={active}
               content={
                 <div className="cam-list">
-                  {camStyle.cams.map(id => (
-                    <CamMenuItem
-                      key={id}
-                      {...cams[id]}
-                    />
-                  ))}
+                  {Array.from(camStyle.cams)
+                    .sort(
+                      (first, second) =>
+                        cams[first].rangeMin - cams[second].rangeMin
+                    )
+                    .map(id => (
+                      <CamMenuItem key={id} {...cams[id]} />
+                    ))}
                 </div>
               }
             />
