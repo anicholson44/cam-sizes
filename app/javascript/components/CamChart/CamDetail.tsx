@@ -68,7 +68,11 @@ const CamDetail = ({
             filter={`url(#${containerParams.shadowId})`}
           ></path>
         )}
-        <g transform={position === "left" ? `translate(-${width + innerPadding}, 0)` : ""}>
+        <g
+          transform={
+            position === "left" ? `translate(-${width + innerPadding}, 0)` : ""
+          }
+        >
           <DetailField
             label="Manufacturer"
             value={cam.manufacturer.name}
@@ -130,11 +134,11 @@ const CamDetail = ({
               }}
             >
               <div
-                className="button"
-                style={{ padding: 4 }}
-                onClick={() => dispatch(actions.hideCamDetail())}
+                className="button negative"
+                style={{ padding: 4, color: "rgba(255,0,0,.7)" }}
+                onClick={() => dispatch(actions.deselectCam(id))}
               >
-                Close
+                Remove
               </div>
               {cam.buyLink && (
                 <a
