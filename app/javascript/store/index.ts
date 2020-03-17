@@ -20,10 +20,13 @@ const urlParams = new URLSearchParams(window.location.search);
 const selectedCamsParam = urlParams.get("selectedCams");
 let selectedCams;
 try {
-  selectedCams = JSON.parse(decodeURI(selectedCamsParam));
+  selectedCams = selectedCamsParam
+    ? JSON.parse(decodeURI(selectedCamsParam))
+    : undefined;
 } catch (e) {
-  selectedCams = selectedCamsStorage.get();
+  console.error(e);
 }
+selectedCams = selectedCams || selectedCamsStorage.get() || {};
 
 const store = createStore(
   createReducer({ selectedCams }),
