@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Header, Segment, List, Icon, Checkbox } from "semantic-ui-react";
 import { selectors, actions, RootState } from "../../store";
 import ClearRackButton from "./ClearRackButton";
+import ShareRackBar from "./ShareRackBar";
 
 const Rack = () => {
   const selectedCamIds = useSelector(selectors.getSelectedCams);
@@ -16,6 +17,9 @@ const Rack = () => {
     ({ showDuplicatesInChart }) => showDuplicatesInChart
   );
   const dispatch = useDispatch();
+  const shareUrl = `http://www.camsizes.com/cams?selectedCams=${encodeURI(
+    JSON.stringify(selectedCamIds)
+  )}`;
 
   return (
     <>
@@ -24,11 +28,17 @@ const Rack = () => {
       </Header>
       <Segment id="rack">
         <List>
+          {selectedCams.length > 0 && (
+            <List.Item id="share-rack">
+              <List.Header>Share:</List.Header>
+              <ShareRackBar shareUrl={shareUrl} />
+            </List.Item>
+          )}
           <List.Item id="rack-weight">
             <List.Header>Total Weight:</List.Header>
             {weight}g
           </List.Item>
-          {selectedCams.length !== 0 && (
+          {selectedCams.length > 0 && (
             <>
               <List.Item>
                 <ClearRackButton />

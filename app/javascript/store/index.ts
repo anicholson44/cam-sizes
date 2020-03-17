@@ -3,9 +3,11 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { createEpicMiddleware } from "redux-observable";
 import camelize from "redux-camelize";
 
-import reducer from "./reducer";
+import createReducer from "./reducer";
 import epic from "./epic";
-import localStorageMiddleware, { rootStateStorage } from "./middleware/local-storage";
+import localStorageMiddleware, {
+  selectedCamsStorage
+} from "./middleware/local-storage";
 
 export { default as actions } from "./actions";
 export * from "./types";
@@ -14,8 +16,17 @@ export { selectors };
 
 const epicMiddleware = createEpicMiddleware();
 
+const urlParams = new URLSearchParams(window.location.search);
+const selectedCamsParam = urlParams.get("selectedCams");
+let selectedCams;
+try {
+  selectedCams = JSON.parse(decodeURI(selectedCamsParam));
+} catch (e) {
+  selectedCams = selectedCamsStorage.get();
+}
+
 const store = createStore(
-  reducer(rootStateStorage.get() || undefined),
+  createReducer({ selectedCams }),
   composeWithDevTools(
     applyMiddleware(camelize(), epicMiddleware, localStorageMiddleware)
   )

@@ -1,16 +1,18 @@
 import { Middleware } from "redux";
 import { RootState } from "..";
 
-const rootStateKey = "rootState";
+const selectedCamsKey = "selectedCams";
 
-export const rootStateStorage = {
-    set: (s: RootState) => window.localStorage.setItem(rootStateKey, JSON.stringify(s)),
-    get: (): RootState => JSON.parse(window.localStorage.getItem(rootStateKey))
+export const selectedCamsStorage = {
+  set: (s: RootState["selectedCams"]) =>
+    window.localStorage.setItem(selectedCamsKey, JSON.stringify(s)),
+  get: (): RootState["selectedCams"] =>
+    JSON.parse(window.localStorage.getItem(selectedCamsKey)) || {}
 };
 
 const middleware: Middleware<{}, RootState> = store => next => action => {
   const result = next(action);
-  rootStateStorage.set(store.getState());
+  selectedCamsStorage.set(store.getState().selectedCams);
   return result;
 };
 

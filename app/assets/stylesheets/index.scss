@@ -18,6 +18,11 @@
   #rack-header {
     text-align: center;
   }
+  #share-rack {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   #rack-weight {
     display: flex;
     justify-content: space-between;
@@ -124,4 +129,16 @@ i.icon.minus {
   width: 1em;
   height: 1em;
   border-radius: 2px;
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .5s ease;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .5s, opacity .5s ease;
 }

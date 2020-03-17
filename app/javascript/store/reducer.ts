@@ -3,24 +3,35 @@ import { getType } from "typesafe-actions";
 import { RootState, RootAction } from "./types";
 import actions from "./actions";
 
-const defaultState: RootState = {
-  entities: {
-    manufacturers: {},
-    camStyles: {},
-    cams: {}
-  },
-  selectedCams: {},
-  highlightedCams: {},
-  highlightedCamRange: undefined,
-  showDetailForCam: undefined,
-  showDuplicatesInChart: true
-};
+const defaultState = ({
+  loading = false,
+  entities = { manufacturers: {}, camStyles: {}, cams: {} },
+  selectedCams = {},
+  highlightedCams = {},
+  highlightedCamRange,
+  showDetailForCam,
+  showDuplicatesInChart = true
+}: Partial<RootState>): RootState => ({
+  loading,
+  entities,
+  selectedCams,
+  highlightedCams,
+  highlightedCamRange,
+  showDetailForCam,
+  showDuplicatesInChart
+});
 
 const reducer = (
-  state: RootState = defaultState,
+  state: RootState = defaultState({}),
   action: RootAction
 ): RootState => {
   switch (action.type) {
+    case getType(actions.fetchCamsAsync.request): {
+      return {
+        ...state,
+        loading: true
+      };
+    }
     case getType(actions.fetchCamsAsync.success): {
       const { payload: entities } = action;
       let { selectedCams } = state;
@@ -35,7 +46,7 @@ const reducer = (
           return o;
         }, {});
       }
-      return { ...state, entities, selectedCams };
+      return { ...state, loading: false, entities, selectedCams };
     }
     case getType(actions.selectCamStyle): {
       const { cams } = state.entities.camStyles[action.payload];
@@ -58,7 +69,7 @@ const reducer = (
       cams.forEach(id => {
         delete selectedCams[id];
         if (showDetailForCam === id) {
-          showDetailForCam = defaultState.showDetailForCam;
+          showDetailForCam = defaultState({}).showDetailForCam;
         }
       });
       return {
@@ -85,7 +96,7 @@ const reducer = (
       } else {
         delete selectedCams[action.payload];
         if (action.payload === showDetailForCam) {
-          showDetailForCam = defaultState.showDetailForCam;
+          showDetailForCam = defaultState({}).showDetailForCam;
         }
       }
       return {
@@ -97,8 +108,8 @@ const reducer = (
     case getType(actions.deselectAllCams): {
       return {
         ...state,
-        selectedCams: defaultState.selectedCams,
-        showDetailForCam: defaultState.showDetailForCam
+        selectedCams: defaultState({}).selectedCams,
+        showDetailForCam: defaultState({}).showDetailForCam
       };
     }
     case getType(actions.highlightCamStyle): {
@@ -154,7 +165,7 @@ const reducer = (
     case getType(actions.hideCamDetail): {
       return {
         ...state,
-        showDetailForCam: defaultState.showDetailForCam
+        showDetailForCam: defaultState({}).showDetailForCam
       };
     }
     case getType(actions.setShowDuplicatesInChart): {
@@ -169,7 +180,7 @@ const reducer = (
   }
 };
 
-export default (initialState: RootState) => (
+export default (initialState: Partial<RootState>) => (
   state = initialState,
   action: RootAction
-) => reducer(state, action);
+) => reducer(defaultState(state), action);

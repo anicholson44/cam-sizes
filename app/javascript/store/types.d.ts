@@ -50,6 +50,7 @@ export interface EntitiesState {
 }
 
 export interface RootState {
+  readonly loading: boolean;
   readonly entities: EntitiesState;
   readonly selectedCams: IdStore<number>;
   readonly highlightedCams: IdStore<true>;
