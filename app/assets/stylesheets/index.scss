@@ -49,6 +49,35 @@
 #chart-container {
   width: 100%;
   margin: 0px 20px;
+
+  #chart-menu {
+    display: flex;
+    align-items: center;
+
+    #y-axis-radio {
+      display: flex;
+      align-items: center;
+
+      #y-axis-radio-label {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        #up-down-arrows {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-right: 0;
+        }
+      }
+      * {
+        margin-right: 10px;
+      }
+    }
+    #x-axis-label {
+      position: relative;
+      left: 27%;
+    }
+  }
 }
 
 #rack-container {
@@ -129,7 +158,8 @@ div.stats {
   display: flex;
   justify-content: space-between;
   h1,
-  h2 {
+  h2,
+  h3 {
     margin: 1em;
   }
 }

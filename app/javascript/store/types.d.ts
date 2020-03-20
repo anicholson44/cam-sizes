@@ -59,6 +59,7 @@ export interface RootState {
   readonly showDuplicatesInChart: boolean;
   readonly showCamMenu: boolean;
   readonly showRack: boolean;
+  readonly yAxis: "strength" | "weight";
 }
 
 export type RootEpic = Epic<

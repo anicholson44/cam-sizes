@@ -8,6 +8,8 @@ const fetchCamsAsync = createAsyncAction(
   "FETCH_CAMS_FAILURE"
 )<void, [EntitiesState, { camelize: true }], Error>();
 
+const changeYAxis = createAction("CHANGE_Y_AXIS")<"strength" | "weight">();
+
 const selectCamStyle = createAction("SELECT_CAM_STYLE")<number>();
 const deselectCamStyle = createAction("DESELECT_CAM_STYLE")<number>();
 
@@ -52,5 +54,6 @@ export default {
   showCamMenu,
   hideCamMenu,
   showRack,
-  hideRack
+  hideRack,
+  changeYAxis
 };

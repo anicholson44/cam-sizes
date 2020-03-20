@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import { RootState, selectors } from "../../store";
 import Chart from "./Chart";
-
+import ChartMenu from "./ChartMenu";
 
 const CamChart = () => {
   const cams = useSelector(selectors.getCams);
@@ -13,6 +13,9 @@ const CamChart = () => {
   const showDetailForCam = useSelector(selectors.getShowDetailForCam);
   const showDuplicatesInChart = useSelector<RootState, boolean>(
     ({ showDuplicatesInChart }) => showDuplicatesInChart
+  );
+  const yAxis = useSelector<RootState, "strength" | "weight">(
+    ({ yAxis }) => yAxis
   );
 
   const selectedCams = useSelector(selectors.getSelectedCams);
@@ -34,13 +37,17 @@ const CamChart = () => {
       );
     });
   return (
-    <Chart
-      camStyles={camStyles}
-      highlightedCams={highlightedCams}
-      highlightedCamRange={highlightedCamRange}
-      showDetailForCam={showDetailForCam}
-      camsToShow={camsToShow}
-    />
+    <div>
+      <ChartMenu />
+      <Chart
+        yAxis={yAxis}
+        camStyles={camStyles}
+        highlightedCams={highlightedCams}
+        highlightedCamRange={highlightedCamRange}
+        showDetailForCam={showDetailForCam}
+        camsToShow={camsToShow}
+      />
+    </div>
   );
 };
 

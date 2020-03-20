@@ -15,7 +15,7 @@ const Header = ({
   onClose: () => unknown;
 }) => {
   return (
-    <h2>
+    <h3>
       <div
         className={`sidebar-menu-header ${orientation} ${
           open ? "open" : "closed"
@@ -30,7 +30,7 @@ const Header = ({
           <Icon name={open ? "chevron down" : "chevron left"} />
         ) : null}
       </div>
-    </h2>
+    </h3>
   );
 };
 

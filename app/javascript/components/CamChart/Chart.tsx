@@ -5,38 +5,7 @@ import { EntityMap, Cam, CamStyle, IdStore, actions } from "../../store";
 import XAxisTick from "./XAxisTick";
 import CamDetail from "./CamDetail";
 import CamRect from "./CamRect";
-
-const shadowId = "shadow";
-const height = 5000;
-const width = 1200;
-const paddingX = 0;
-const paddingY = 20;
-
-// suffix numbers to distinguish numbers that are in pixels from numbers in millimeters
-const maxX_mm = 220;
-
-const millimetersToPixels = width / maxX_mm;
-
-const tickDistance_mm = 10;
-const numXTicks = maxX_mm / tickDistance_mm;
-const tickDistance_pixels = millimetersToPixels * tickDistance_mm;
-
-const maxY_kn = 1875;
-const kilonewtonsToPixels = height / maxY_kn;
-
-export const containerParams = {
-  height,
-  width,
-  paddingX,
-  paddingY,
-  maxX_mm,
-  millimetersToPixels,
-  kilonewtonsToPixels,
-  tickDistance_mm,
-  numXTicks,
-  tickDistance_pixels,
-  shadowId
-};
+import containerParams from "./container-params";
 
 const xTicks = Array.from({ length: containerParams.numXTicks }, (_, i) => (
   <XAxisTick
@@ -51,13 +20,15 @@ const Chart = ({
   highlightedCams,
   highlightedCamRange,
   showDetailForCam,
-  camsToShow
+  camsToShow,
+  yAxis
 }: {
   camStyles: EntityMap<CamStyle>;
   highlightedCams: IdStore<true>;
   highlightedCamRange: number | void;
   showDetailForCam: number | void;
   camsToShow: Cam[];
+  yAxis: "strength" | "weight";
 }) => {
   const dispatch = useDispatch();
 
@@ -65,12 +36,24 @@ const Chart = ({
   let camDetail = null;
   let y = 0;
   const camRects = camsToShow.map((cam, i) => {
-    const { id, color, rangeMin, rangeMax, name, camStyleId, strength } = cam;
+    const {
+      id,
+      color,
+      rangeMin,
+      rangeMax,
+      name,
+      camStyleId,
+      strength,
+      weight
+    } = cam;
     const x = containerParams.millimetersToPixels * rangeMin;
     const rectWidth =
       containerParams.millimetersToPixels * (rangeMax - rangeMin);
     const thisY = y;
-    const height = strength * containerParams.kilonewtonsToPixels;
+    const height =
+      yAxis === "strength"
+        ? strength * containerParams.kilonewtonsToPixels
+        : weight * containerParams.gramsToPixels;
     y += height + 1;
     if (highlightedCamRange === id) {
       camRangeHighlight = (
@@ -130,8 +113,8 @@ const Chart = ({
         showRange={!!highlightedCamRange}
         rangeMin={rangeMin}
         rangeMax={rangeMax}
-        strength={strength}
-        showStrength={!highlightedCamRange}
+        yAxisLabel={yAxis === "strength" ? `${strength}kN` : `${weight}g`}
+        showYAxisLabel={!highlightedCamRange}
       />
     );
   });

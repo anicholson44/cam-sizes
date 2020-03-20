@@ -12,7 +12,8 @@ const defaultState = ({
   showDetailForCam,
   showDuplicatesInChart = true,
   showCamMenu = window.screen.width > 768,
-  showRack = window.screen.width > 768
+  showRack = window.screen.width > 768,
+  yAxis = "strength"
 }: Partial<RootState>): RootState => ({
   loading,
   entities,
@@ -22,7 +23,8 @@ const defaultState = ({
   showDetailForCam,
   showDuplicatesInChart,
   showCamMenu,
-  showRack
+  showRack,
+  yAxis
 });
 
 const reducer = (
@@ -200,6 +202,12 @@ const reducer = (
       return {
         ...state,
         showRack: false
+      };
+    }
+    case getType(actions.changeYAxis): {
+      return {
+        ...state,
+        yAxis: action.payload
       };
     }
     default: {

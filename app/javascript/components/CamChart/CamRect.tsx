@@ -3,7 +3,7 @@ import React from "react";
 const widthOfLabel = (label: string) => {
   const length = label.replace(".", "").length;
   const hasDecimal = label.includes(".");
-  return 9 * length + (hasDecimal ? 5 : 0);
+  return 8 * length + (hasDecimal ? 5 : 0);
 };
 
 const rangeLabelStyle = { fontSize: 12, opacity: "50%" };
@@ -23,8 +23,8 @@ const CamRect = ({
   showRange,
   rangeMin,
   rangeMax,
-  strength,
-  showStrength
+  yAxisLabel,
+  showYAxisLabel
 }: {
   onClick: () => unknown;
   color: string;
@@ -40,8 +40,8 @@ const CamRect = ({
   showRange?: boolean;
   rangeMin: number;
   rangeMax: number;
-  strength: number;
-  showStrength: boolean;
+  yAxisLabel: string;
+  showYAxisLabel: boolean;
 }) => {
   const textY = y + height / 2 + 4;
   const labelOffset = 5 + (showRange ? widthOfLabel(rangeMax + "mm") : 0);
@@ -79,13 +79,13 @@ const CamRect = ({
           </text>
         </>
       ) : (
-        showStrength && (
+        showYAxisLabel && (
           <text
-            x={x - widthOfLabel(strength + "kN")}
+            x={x - widthOfLabel(yAxisLabel + "kN")}
             y={textY}
             style={rangeLabelStyle}
           >
-            {strength}kN
+            {yAxisLabel}
           </text>
         )
       )}
