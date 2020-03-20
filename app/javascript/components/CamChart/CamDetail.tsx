@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { selectors, actions } from "../../store";
 import { containerParams } from ".";
-import { Icon } from "semantic-ui-react";
 
 const width = 210;
 const height = 205;
@@ -121,36 +120,18 @@ const CamDetail = ({
             x={innerPadding}
             y={innerPadding + 7 * fieldPadding}
           />
-          <foreignObject
-            x={innerPadding}
-            y={8 * fieldPadding + 10}
-            width={width - innerPadding}
-            height={40}
+          <g
+            transform={`translate(${innerPadding}, ${8 * fieldPadding + 10})`}
+            onClick={() => dispatch(actions.deselectCam(id))}
+            style={{
+              cursor: "pointer"
+            }}
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center"
-              }}
-            >
-              <div
-                className="button negative"
-                style={{ padding: 4, color: "rgba(255,0,0,.7)" }}
-                onClick={() => dispatch(actions.deselectCam(id))}
-              >
-                Remove
-              </div>
-              {cam.buyLink && (
-                <a
-                  href={cam.buyLink}
-                  target="_blank"
-                  style={{ position: "absolute", left: fieldValueX }}
-                >
-                  <Icon name="cart"></Icon> Buy
-                </a>
-              )}
-            </div>
-          </foreignObject>
+            <rect height={30} width={width - 20} rx={3}></rect>
+            <text x={65} y={20} fill="black">
+              Remove
+            </text>
+          </g>
         </g>
       </g>
     </>
