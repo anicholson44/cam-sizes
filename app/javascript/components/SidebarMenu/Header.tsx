@@ -23,11 +23,11 @@ const Header = ({
         onClick={() => (open ? onClose() : onOpen())}
       >
         {orientation === "right" ? (
-          <Icon name={open ? "chevron right" : "chevron left"} />
+          <Icon name={open ? "chevron down" : "chevron right"} />
         ) : null}
         {children}
         {orientation === "left" ? (
-          <Icon name={open ? "chevron left" : "chevron right"} />
+          <Icon name={open ? "chevron down" : "chevron left"} />
         ) : null}
       </div>
     </h2>
