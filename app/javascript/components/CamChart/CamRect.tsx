@@ -3,10 +3,10 @@ import React from "react";
 const widthOfLabel = (label: string) => {
   const length = label.replace(".", "").length;
   const hasDecimal = label.includes(".");
-  return 8 * length + (hasDecimal ? 5 : 0);
+  return 9 * length + (hasDecimal ? 5 : 0);
 };
 
-const rangeLabelStyle = { fontSize: 10, opacity: "50%" };
+const rangeLabelStyle = { fontSize: 12, opacity: "50%" };
 
 const CamRect = ({
   onClick,
@@ -62,7 +62,7 @@ const CamRect = ({
         height={height}
         opacity={blurred ? 0.3 : 1}
       />
-      <text x={x + width + labelOffset} y={textY} style={{ fontSize: 10 }}>
+      <text x={x + width + labelOffset} y={textY} style={{ fontSize: 13 }}>
         {label}
       </text>
       {showRange ? (
