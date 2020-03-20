@@ -16,7 +16,7 @@ const tickDistance_pixels = millimetersToPixels * tickDistance_mm;
 const maxY_kn = 1875;
 const kilonewtonsToPixels = height / maxY_kn;
 
-const maxY_g = 12000;
+const maxY_g = 15000;
 const gramsToPixels = height / maxY_g;
 
 export default {
