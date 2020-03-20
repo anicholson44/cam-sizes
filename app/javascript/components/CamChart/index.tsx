@@ -176,7 +176,7 @@ const CamChart = () => {
       <text
         x={width / 2 - 50}
         y={(paddingY * -1) / 2}
-        style={{ fontSize: 20, opacity: 0.8 }}
+        style={{ fontSize: 16 }}
       >
         Expansion Range
       </text>
