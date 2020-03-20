@@ -6,6 +6,7 @@ import XAxisTick from "./XAxisTick";
 import CamRect from "./CamRect";
 import CamDetail from "./CamDetail";
 
+const shadowId = "shadow";
 const height = 5000;
 const width = 1200;
 const paddingX = 0;
@@ -22,7 +23,9 @@ const tickDistance_pixels = millimetersToPixels * tickDistance_mm;
 
 const maxY_kn = 1875;
 const kilonewtonsToPixels = height / maxY_kn;
-const shadowId = "shadow";
+
+const maxY_g = 10000;
+const gramsToPixels = height / maxY_g;
 
 export const containerParams = {
   height,
