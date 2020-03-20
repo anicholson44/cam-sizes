@@ -26,7 +26,7 @@ const App = () => {
             onOpen={() => dispatch(actions.showCamMenu())}
             onClose={() => dispatch(actions.hideCamMenu())}
           >
-            Cam Menu
+            Add Cams
           </SideBarMenu.Header>
           <h1>Compare Trad Climbing Cams</h1>
           <SideBarMenu.Header
