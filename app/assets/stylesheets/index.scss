@@ -9,27 +9,36 @@
   position: absolute;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 242px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   padding: 10px;
+  transition: width 0.25s ease-in-out;
   &.left {
     left: -2px;
     border-left: 0;
     padding-left: 30px;
-    &::after {
-      &.open {
-        content: "<";
-      }
-      &.closed {
-        content: ">";
-      }
+    i {
+      padding-left: 10px;
+    }
+    &.closed {
+      padding-left: 10px;
     }
   }
   &.right {
     right: -2px;
     border-right: 0;
     padding-right: 30px;
+    i {
+      padding-right: 10px;
+    }
+    &.closed {
+      padding-right: 10px;
+    }
+  }
+  &.closed {
+    width: 120px;
   }
 }
 
@@ -43,7 +52,7 @@
 
 #rack-container {
   width: 300px;
-  margin: 0px 20px;
+  margin-left: 20px;
   #rack-header {
     text-align: center;
   }
