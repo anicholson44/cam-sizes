@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { selectors, actions } from "../../store";
-import { containerParams } from ".";
+import { containerParams } from "./Chart";
 
 const width = 210;
 const height = 205;
