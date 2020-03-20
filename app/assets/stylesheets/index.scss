@@ -4,6 +4,35 @@
   display: flex;
 }
 
+.sidebar-menu-header {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 242px;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  border-radius: 3px;
+  padding: 10px;
+  &.left {
+    left: -2px;
+    border-left: 0;
+    padding-left: 30px;
+    &::after {
+      &.open {
+        content: "<";
+      }
+      &.closed {
+        content: ">";
+      }
+    }
+  }
+  &.right {
+    right: -2px;
+    border-right: 0;
+    padding-right: 30px;
+  }
+}
+
 #menu-container {
   margin: 0px 20px;
 }
@@ -89,8 +118,12 @@ div.stats {
 
 #header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 20px 0 20px 0px;
+  h1,
+  h2 {
+    margin: 1em;
+  }
 }
 
 .cam-list {
@@ -134,11 +167,11 @@ i.icon.minus {
 .visible {
   visibility: visible;
   opacity: 1;
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
 }
 
 .hidden {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s .5s, opacity .5s ease;
+  transition: visibility 0s 0.5s, opacity 0.5s ease;
 }

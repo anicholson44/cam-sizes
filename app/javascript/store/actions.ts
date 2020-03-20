@@ -25,7 +25,14 @@ const unhighlightCamRange = createAction("UNHIGHLIGHT_CAM_RANGE")<void>();
 const showDetailForCam = createAction("SHOW_DETAIL_FOR_CAM")<number>();
 const hideCamDetail = createAction("HIDE_CAM_DETAIL")<void>();
 
-const setShowDuplicatesInChart = createAction("SET_SHOW_DUPLICATES_IN_CHART")<boolean>();
+const setShowDuplicatesInChart = createAction("SET_SHOW_DUPLICATES_IN_CHART")<
+  boolean
+>();
+
+const showCamMenu = createAction("SHOW_CAM_MENU")();
+const hideCamMenu = createAction("HIDE_CAM_MENU")();
+const showRack = createAction("SHOW_RACK")();
+const hideRack = createAction("HIDE_RACK")();
 
 export default {
   fetchCamsAsync,
@@ -41,5 +48,9 @@ export default {
   unhighlightCamRange,
   showDetailForCam,
   hideCamDetail,
-  setShowDuplicatesInChart
+  setShowDuplicatesInChart,
+  showCamMenu,
+  hideCamMenu,
+  showRack,
+  hideRack
 };

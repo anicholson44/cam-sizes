@@ -1,0 +1,37 @@
+import React from "react";
+import { Icon } from "semantic-ui-react";
+
+const Header = ({
+  children,
+  orientation,
+  open,
+  onOpen,
+  onClose
+}: {
+  children: React.ReactNode;
+  orientation: "left" | "right";
+  open: boolean;
+  onOpen: () => unknown;
+  onClose: () => unknown;
+}) => {
+  return (
+    <h2>
+      <div
+        className={`sidebar-menu-header ${orientation} ${
+          open ? "open" : "closed"
+        }`}
+        onClick={() => (open ? onClose() : onOpen())}
+      >
+        {orientation === "right" ? (
+          <Icon name={open ? "chevron right" : "chevron left"} />
+        ) : null}
+        {children}
+        {orientation === "left" ? (
+          <Icon name={open ? "chevron left" : "chevron right"} />
+        ) : null}
+      </div>
+    </h2>
+  );
+};
+
+export default Header;

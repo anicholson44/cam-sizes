@@ -23,9 +23,6 @@ const Rack = () => {
 
   return (
     <>
-      <Header as="h3" id="rack-header">
-        My Rack
-      </Header>
       <Segment id="rack">
         <List>
           {selectedCams.length > 0 && (

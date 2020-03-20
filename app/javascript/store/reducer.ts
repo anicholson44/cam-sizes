@@ -10,7 +10,9 @@ const defaultState = ({
   highlightedCams = {},
   highlightedCamRange,
   showDetailForCam,
-  showDuplicatesInChart = true
+  showDuplicatesInChart = true,
+  showCamMenu = window.screen.width > 768,
+  showRack = window.screen.width > 768
 }: Partial<RootState>): RootState => ({
   loading,
   entities,
@@ -18,7 +20,9 @@ const defaultState = ({
   highlightedCams,
   highlightedCamRange,
   showDetailForCam,
-  showDuplicatesInChart
+  showDuplicatesInChart,
+  showCamMenu,
+  showRack
 });
 
 const reducer = (
@@ -172,6 +176,30 @@ const reducer = (
       return {
         ...state,
         showDuplicatesInChart: action.payload
+      };
+    }
+    case getType(actions.showCamMenu): {
+      return {
+        ...state,
+        showCamMenu: true
+      };
+    }
+    case getType(actions.hideCamMenu): {
+      return {
+        ...state,
+        showCamMenu: false
+      };
+    }
+    case getType(actions.showRack): {
+      return {
+        ...state,
+        showRack: true
+      };
+    }
+    case getType(actions.hideRack): {
+      return {
+        ...state,
+        showRack: false
       };
     }
     default: {
