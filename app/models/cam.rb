@@ -6,7 +6,7 @@ class Cam < ApplicationRecord
   validates :range_min, presence: true, numericality: { greater_than: 0 }
   validates :range_max, presence: true, numericality: { greater_than: 0 }
   validates :weight, presence: true, numericality: { greater_than: 0 }
-  validates :color, inclusion: { in: %w[black red yellow blue grey purple green orange gold silver] }
+  validates :color, inclusion: { in: %w[black white pink brown navy red yellow blue grey purple green orange gold silver] }
 
   belongs_to :cam_style
 end

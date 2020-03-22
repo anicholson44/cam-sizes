@@ -887,3 +887,130 @@ friend_flexes = {
 friend_flexes.each do |name, attrs|
   seed(Cam, { name: name, cam_style_id: friend_flex.id }, attrs)
 end
+
+camp = Manufacturer.find_or_create_by!(name: 'Camp')
+
+tricam = seed(CamStyle, { name: "Tricam" }, { manufacturer_id: camp.id, lobes: 1 })
+
+tricams = {
+  '.125' => {
+    color: 'white',
+    weight: 10.5,
+    strength: 3,
+    range_min: 10,
+    range_max: 16,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+  },
+  '.25' => {
+    color: 'black',
+    weight: 19,
+    strength: 5,
+    range_min: 13.5,
+    range_max: 22,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '.5' => {
+    color: 'pink',
+    weight: 30,
+    strength: 9,
+    range_min: 18,
+    range_max: 27,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '#1' => {
+    color: 'red',
+    weight: 37,
+    strength: 10,
+    range_min: 21,
+    range_max: 32,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '1.5' => {
+    color: 'brown',
+    weight: 55,
+    strength: 14,
+    range_min: 26,
+    range_max: 40,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '#2' => {
+    color: 'purple',
+    weight: 57,
+    strength: 14,
+    range_min: 29,
+    range_max: 45,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '2.5' => {
+    color: 'blue',
+    weight: 77,
+    strength: 15,
+    range_min: 32,
+    range_max: 48,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '#3' => {
+    color: 'navy',
+    weight: 90,
+    strength: 16,
+    range_min: 38,
+    range_max: 54,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '3.5' => {
+    color: 'grey',
+    weight: 117,
+    strength: 18,
+    range_min: 41,
+    range_max: 60,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '#4' => {
+    color: 'green',
+    weight: 138,
+    strength: 22,
+    range_min: 45,
+    range_max: 64,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '#5' => {
+    color: 'orange',
+    weight: 120,
+    strength: 22,
+    range_min: 57,
+    range_max: 89,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '#6' => {
+    color: 'yellow',
+    weight: 200,
+    strength: 18,
+    range_min: 73,
+    range_max: 105,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+  '#7' => {
+    color: 'gold',
+    weight: 264,
+    strength: 16,
+    range_min: 92,
+    range_max: 140,
+    buy_link: 'https://www.camp-usa.com/outdoor/product/rock-protection/tricam/'
+
+  },
+}
+
+tricams.each do |name, attrs|
+  seed(Cam, { name: name, cam_style_id: tricam.id }, attrs)
+end
